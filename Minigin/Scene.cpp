@@ -7,26 +7,34 @@ unsigned int Scene::m_idCounter = 0;
 
 Scene::Scene(const std::string& name) : m_name(name) {}
 
-Scene::~Scene() = default;
+Scene::~Scene() {
+	RemoveAll();
+};
 
-void Scene::Add(std::shared_ptr<GameObject> object)
+void Scene::Add(GameObject* object)
 {
-	m_objects.emplace_back(std::move(object));
+	m_pObjects.push_back(object);
 }
 
-void Scene::Remove(std::shared_ptr<GameObject> object)
+void Scene::Remove([[maybe_unused]]GameObject* object)
 {
-	m_objects.erase(std::remove(m_objects.begin(), m_objects.end(), object), m_objects.end());
+	delete object;
+	m_pObjects.erase(std::remove(m_pObjects.begin(), m_pObjects.end(), object), m_pObjects.end());
+	
 }
 
 void Scene::RemoveAll()
 {
-	m_objects.clear();
+	for (auto elem : m_pObjects)
+	{
+		delete elem;
+	}
+	m_pObjects.clear();
 }
 
 void Scene::Update()
 {
-	for(auto& object : m_objects)
+	for(auto object : m_pObjects)
 	{
 		object->Update();
 	}
@@ -34,7 +42,7 @@ void Scene::Update()
 
 void Scene::Render() const
 {
-	for (const auto& object : m_objects)
+	for (const auto object : m_pObjects)
 	{
 		object->Render();
 	}
