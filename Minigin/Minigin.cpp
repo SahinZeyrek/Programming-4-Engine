@@ -9,8 +9,11 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include <chrono>
+#include "Time.h"
 
 SDL_Window* g_window{};
+using namespace std::chrono;
 
 void PrintSDLVersion()
 {
@@ -85,9 +88,20 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 	// todo: this update loop could use some work.
 	bool doContinue = true;
+	auto lastTime = high_resolution_clock::now();
+	float lag{ 0.0f };
 	while (doContinue)
 	{
+		const auto currentTime = high_resolution_clock::now();
+		Time::deltaTime = duration<float>(currentTime - lastTime).count();
+		lastTime = currentTime;
+		lag += Time::deltaTime;
 		doContinue = input.ProcessInput();
+		while (lag >= Time::fixedDeltaTime)
+		{
+			// sceneManager.FixedUpdate();
+			lag -= Time::fixedDeltaTime;
+		}
 		sceneManager.Update();
 		renderer.Render();
 	}

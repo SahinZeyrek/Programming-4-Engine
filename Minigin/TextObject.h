@@ -16,7 +16,7 @@ namespace dae
 
 		void SetText(const std::string& text);
 		void SetPosition(float x, float y);
-
+		/*std::shared_ptr<Texture2D> GetTexture();*/
 		TextObject(const std::string& text, std::shared_ptr<Font> font);
 		virtual ~TextObject() = default;
 		TextObject(const TextObject& other) = delete;

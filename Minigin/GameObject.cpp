@@ -12,7 +12,13 @@ dae::GameObject::~GameObject()
 	}
 };
 
-void dae::GameObject::Update(){}
+void dae::GameObject::Update()
+{
+	for (auto comp : m_pComponents)
+	{
+		comp->Update();
+	}
+}
 
 void dae::GameObject::Render() const
 {
