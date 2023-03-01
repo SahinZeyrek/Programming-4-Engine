@@ -43,6 +43,7 @@ namespace dae
 				auto pComponent = dynamic_cast<T*>(m_pComponents[i]);
 				if (pComponent != nullptr)
 				{
+					delete pComponent;
 					m_pComponents.erase(pComponent);
 				}
 			}

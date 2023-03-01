@@ -16,7 +16,7 @@ void Scene::Add(GameObject* object)
 	m_pObjects.push_back(object);
 }
 
-void Scene::Remove([[maybe_unused]]GameObject* object)
+void Scene::Remove(GameObject* object)
 {
 	delete object;
 	m_pObjects.erase(std::remove(m_pObjects.begin(), m_pObjects.end(), object), m_pObjects.end());

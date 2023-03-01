@@ -12,7 +12,7 @@ namespace dae
 
 	void RenderTextureComponent::Update()
 	{
-	
+
 	}
 
 	void RenderTextureComponent::Render()

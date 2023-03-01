@@ -11,6 +11,7 @@
 #include "ResourceManager.h"
 #include <chrono>
 #include "Time.h"
+#include <thread>
 
 SDL_Window* g_window{};
 using namespace std::chrono;
@@ -104,6 +105,9 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		}
 		sceneManager.Update();
 		renderer.Render();
+
+		const auto sleepTime = currentTime + milliseconds(Time::frameTimeMs) - high_resolution_clock::now();
+		std::this_thread::sleep_for(sleepTime);
 	}
 
 }
