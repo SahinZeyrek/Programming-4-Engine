@@ -17,11 +17,13 @@ namespace dae
 		virtual void Update()override;
 		virtual void Render() override;
 		void SetTexture(const std::string& filename);
+		TextureObjectPtr GetTexture() { return m_Texture; }
 		RenderTextureComponent(const RenderTextureComponent&) = delete;
 		RenderTextureComponent(RenderTextureComponent&&) = delete;
 		RenderTextureComponent& operator=(const RenderTextureComponent&) = delete;
 		RenderTextureComponent& operator=(const RenderTextureComponent&&) = delete;
 	private:
 		TextureObjectPtr m_Texture{};
+		glm::ivec3 m_renderPos{};
 	};
 };

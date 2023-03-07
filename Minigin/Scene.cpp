@@ -22,14 +22,14 @@ void Scene::Add(GameObject* object)
 
 void Scene::Remove(GameObject* object)
 {
-	m_pMarkedForRemoval.emplace_back(object);
+	m_pMarkedForRemoval.push_back(object);
 }
 
 void Scene::RemoveAll()
 {
 	for (auto elem : m_pObjects)
 	{
-		m_pMarkedForRemoval.emplace_back(elem);
+		m_pMarkedForRemoval.push_back(elem);
 	}
 }
 

@@ -7,7 +7,6 @@ namespace dae
 	RenderTextureComponent::RenderTextureComponent(Component::GameObjectPtr owner, TextureObjectPtr texture) : Component(owner)
 	{
 		m_Texture = texture;
-
 	}
 
 	void RenderTextureComponent::Update()

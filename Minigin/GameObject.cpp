@@ -15,7 +15,7 @@ dae::GameObject::~GameObject()
 
 void dae::GameObject::RemoveComponent(Component* component)
 {
-	m_pMarkedForRemoval.emplace_back(component);
+	m_pMarkedForRemoval.push_back(component);
 }
 
 void dae::GameObject::SetParent(GameObjectPtr newParent, bool keepWorldPos)
