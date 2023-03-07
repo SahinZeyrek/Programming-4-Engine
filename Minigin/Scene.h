@@ -26,6 +26,7 @@ namespace dae
 
 		std::string m_name;
 		std::vector <GameObject*> m_pObjects{};
+		std::vector <GameObject*> m_pMarkedForRemoval{};
 
 		static unsigned int m_idCounter; 
 	};

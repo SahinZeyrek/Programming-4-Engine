@@ -3,16 +3,24 @@
 #include "Transform.h"
 #include "Component.h"
 #include <vector>
+#include <exception>
 namespace dae
 {
 	class Texture2D;
+	class ParentException : public std::exception
+	{	
+	public:
+		ParentException() = default;
 
+		const char* what() const noexcept override {
+			return "Invalid Parent";
+		}
+	};
 	class GameObject final
 	{
-		
+		using GameObjectPtr = GameObject*;
 	public:
-		virtual void Update();
-
+		
 		template <typename T>
 		void AddComponent(T* component)
 		{
@@ -23,7 +31,8 @@ namespace dae
 			m_pComponents.emplace_back(component);
 			return;
 		};
-		template <typename T> T* GetComponent() const
+		template <typename T>
+		T* GetComponent() const
 		{
 			for (auto& comp : m_pComponents)
 			{
@@ -36,9 +45,10 @@ namespace dae
 			}
 			return nullptr;
 		};
-		template <typename T> T* RemoveComponent()
+		template <typename T>
+		void RemoveComponent()
 		{
-			for (size_t i = 0; i < m_pComponents.size(); i++)
+			for (size_t i = 0; i < m_pComponents.size(); ++i)
 			{
 				auto pComponent = dynamic_cast<T*>(m_pComponents[i]);
 				if (pComponent != nullptr)
@@ -48,9 +58,15 @@ namespace dae
 				}
 			}
 		};
-		virtual void Render() const;
+		void RemoveComponent(Component* component);
+
+
+		void SetParent(GameObjectPtr go, bool keepWorldPos);
+		void Update();
+		void Render() const;
 		void SetPosition(float x, float y);
-		Transform GetTransform() const { return m_Transform; }
+		const glm::vec3& GetWorldPosition();
+		void UpdateWorldPos();
 		GameObject() = default;
 		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
@@ -61,7 +77,12 @@ namespace dae
 	private:
 
 		Transform m_Transform{};
-		std::vector<Component*> m_pComponents;
+		glm::vec3 m_worldPos{};
+		
+		std::vector<Component*> m_pComponents{};
+		std::vector<Component*> m_pMarkedForRemoval{};
+		GameObject* m_Parent{};
+		bool m_isDirty{ false };
 
 	};
 }
