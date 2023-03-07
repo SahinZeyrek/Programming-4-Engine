@@ -14,14 +14,14 @@ namespace dae
 		virtual void Update();
 
 		template <typename T>
-		T* AddComponent(T* component)
+		void AddComponent(T* component)
 		{
 			if (component == nullptr)
 			{
-				return nullptr;
+				return;
 			}
 			m_pComponents.emplace_back(component);
-			return nullptr;
+			return;
 		};
 		template <typename T> T* GetComponent() const
 		{

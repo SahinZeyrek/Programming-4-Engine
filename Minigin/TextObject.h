@@ -8,7 +8,7 @@ namespace dae
 {
 	class Font;
 	class Texture2D;
-	class TextObject final 
+	class TextObject final
 	{
 	public:
 		void Update() ;

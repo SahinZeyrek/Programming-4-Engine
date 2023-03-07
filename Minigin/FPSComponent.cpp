@@ -11,30 +11,27 @@ namespace dae
 		++m_FPS;
 		if (m_Timer > m_MaxTime)
 		{
-			m_TextureObj->SetText(std::to_string(m_FPS) + " FPS");
-			m_TextureObj->Update();
+			m_TextComp->SetText(std::to_string(m_FPS) + " FPS");
+			m_TextComp->Update();
 			m_Timer -= m_MaxTime;
 			m_FPS = 0;
 		}
 	}
 	void FPSComponent::Render()
 	{
-		m_TextureObj->Render();
+		m_TextComp->Render();
 	}
-	FPSComponent::TextObjectPtr FPSComponent::GetTextureComp() const
+	FPSComponent::TextCompPtr FPSComponent::GetTextureComp() const
 	{
-		return m_TextureObj;
+		return GetOwner()->GetComponent<RenderTextComponent>();
 	}
-	FPSComponent::FPSComponent(GameObjectPtr owner, TextObjectPtr txt) : Component(owner)
+	FPSComponent::FPSComponent(GameObjectPtr owner) : Component(owner)
 	{
-		m_TextureObj = txt;
-		m_TextureObj->Update();
+		m_TextComp = GetTextureComp();
 	}
 
 	FPSComponent::~FPSComponent()
 	{
-		delete m_TextureObj;
-		m_TextureObj = nullptr;
 	}
 	
 
