@@ -8,7 +8,7 @@ namespace dae
 {
 	class Texture2D;
 	class ParentException : public std::exception
-	{	
+	{
 	public:
 		ParentException() = default;
 
@@ -20,7 +20,7 @@ namespace dae
 	{
 		using GameObjectPtr = GameObject*;
 	public:
-		
+
 		template <typename T>
 		void AddComponent(T* component)
 		{
@@ -59,7 +59,9 @@ namespace dae
 		};
 		void RemoveComponent(Component* component);
 
-
+		Transform GetTransform() const{ return m_Transform;};
+		void SetSpeed(float speed) { m_Speed = speed; };
+		float GetSpeed() const { return m_Speed; };
 		void SetParent(GameObjectPtr go, bool keepWorldPos);
 		void Update();
 		void Render() const;
@@ -77,7 +79,8 @@ namespace dae
 
 		Transform m_Transform{};
 		glm::vec3 m_worldPos{};
-		
+		float m_Speed{};
+
 		std::vector<Component*> m_pComponents{};
 		std::vector<Component*> m_pMarkedForRemoval{};
 		GameObject* m_Parent{};

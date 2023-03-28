@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include "Singleton.h"
-
+#include <vector>
 namespace dae
 {
 	class Texture2D;
@@ -12,7 +12,12 @@ namespace dae
 	{
 		SDL_Renderer* m_renderer{};
 		SDL_Window* m_window{};
-		SDL_Color m_clearColor{};	
+		SDL_Color m_clearColor{};
+		mutable std::vector<float> m_Ex01Timings{}; // mutable so const function doesnt complain
+		mutable std::vector<float> m_Ex02Timings{};
+		mutable std::vector<float> m_Ex02AltTimings{};
+
+		static int m_SampleCount;
 	public:
 		void Init(SDL_Window* window);
 		void Render() const;

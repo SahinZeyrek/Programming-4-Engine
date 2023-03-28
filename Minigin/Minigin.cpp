@@ -12,7 +12,9 @@
 #include <chrono>
 #include "Time.h"
 #include <thread>
-
+#include "imgui.h"
+#include "backends/imgui_impl_opengl2.h"
+#include "backends/imgui_impl_sdl2.h"
 SDL_Window* g_window{};
 using namespace std::chrono;
 
@@ -106,6 +108,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		sceneManager.Update();
 		renderer.Render();
 
+		
 		const auto sleepTime = currentTime + milliseconds(Time::frameTimeMs) - high_resolution_clock::now();
 		std::this_thread::sleep_for(sleepTime);
 	}
