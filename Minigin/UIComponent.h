@@ -2,6 +2,7 @@
 #include "Observer.h"
 #include "RenderTextComponent.h"
 #include "HealthComponent.h"
+#include "ScoreComponent.h"
 namespace dae
 {
 	class UIComponent final : public Component,public Observer
@@ -20,7 +21,8 @@ namespace dae
 		//------------------------------------------------
 		// RULE OF FIVE 
 		//------------------------------------------------
-		UIComponent(GameObjectPtr owner, GameObjectPtr target);
+		UIComponent(GameObjectPtr owner, HealtCompPtr targetLives);
+		UIComponent(GameObjectPtr owner, ScoreComponent* targetScore);
 		virtual ~UIComponent();
 		UIComponent(const UIComponent&) = delete;
 		UIComponent(UIComponent&&) = delete;
@@ -29,6 +31,7 @@ namespace dae
 	private:
 		TextCompPtr m_TextRender{};
 		HealtCompPtr m_HealthComp{};
+		ScoreComponent* m_ScoreComp{};
 	};
 }
 

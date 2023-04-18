@@ -3,15 +3,15 @@
 #include "GameObject.h"
 namespace dae
 {
-	class MoveDownCommand final : public Command
+	class AddScoreCommand : public Command
 	{
 	public:
-		MoveDownCommand(GameObject* go)
+		AddScoreCommand(GameObject* target)
 		{
-			m_ObjectPtr = go;
-		}
+			m_Target = target;
+		};
 		virtual void Execute() override;
 	private:
-		GameObject* m_ObjectPtr{};
+		GameObject* m_Target;
 	};
 }

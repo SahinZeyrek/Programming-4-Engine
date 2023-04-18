@@ -15,6 +15,9 @@
 #include "imgui.h"
 #include "backends/imgui_impl_opengl2.h"
 #include "backends/imgui_impl_sdl2.h"
+#pragma warning(disable:6340)
+#include <steam_api.h>
+#pragma warning(default:6340)
 SDL_Window* g_window{};
 using namespace std::chrono;
 
@@ -59,8 +62,8 @@ dae::Minigin::Minigin(const std::string &dataPath)
 		"Programming 4 assignment",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		640,
-		480,
+		1280,
+		720,
 		SDL_WINDOW_OPENGL
 	);
 	if (g_window == nullptr) 
@@ -108,7 +111,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		sceneManager.Update();
 		renderer.Render();
 
-		
+		SteamAPI_RunCallbacks();
 		const auto sleepTime = currentTime + milliseconds(Time::frameTimeMs) - high_resolution_clock::now();
 		std::this_thread::sleep_for(sleepTime);
 	}

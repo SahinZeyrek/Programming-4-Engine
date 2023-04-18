@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Commands">
       <UniqueIdentifier>{9b6bb94b-0c8e-4d2d-aa97-72eb1c183015}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Achievements">
+      <UniqueIdentifier>{31b1c5e4-ffc1-4f1d-91c0-28b7a4d88fb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Achievements">
+      <UniqueIdentifier>{93d2a6c8-032e-4d6e-a90e-45188d45561e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -129,18 +135,6 @@
     <ClInclude Include="Command.h">
       <Filter>Header Files\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="MoveUpCommand.h">
-      <Filter>Header Files\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveDownCommand.h">
-      <Filter>Header Files\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveRightCommand.h">
-      <Filter>Header Files\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveLeftCommand.h">
-      <Filter>Header Files\Commands</Filter>
-    </ClInclude>
     <ClInclude Include="AllCommands.h">
       <Filter>Source Files\Commands</Filter>
     </ClInclude>
@@ -161,6 +155,21 @@
     </ClInclude>
     <ClInclude Include="KillCommand.h">
       <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AddScoreCommand.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Achievement.h">
+      <Filter>Header Files\Achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="WinGameAch.h">
+      <Filter>Header Files\Achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="AchievementManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -251,18 +260,6 @@
     <ClCompile Include="Controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MoveUpCommand.cpp">
-      <Filter>Source Files\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveDownCommand.cpp">
-      <Filter>Source Files\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveRightCommand.cpp">
-      <Filter>Source Files\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveLeftCommand.cpp">
-      <Filter>Source Files\Commands</Filter>
-    </ClCompile>
     <ClCompile Include="MoveCommand.cpp">
       <Filter>Source Files\Commands</Filter>
     </ClCompile>
@@ -280,6 +277,21 @@
     </ClCompile>
     <ClCompile Include="KillCommand.cpp">
       <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AddScoreCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Achievement.cpp">
+      <Filter>Source Files\Achievements</Filter>
+    </ClCompile>
+    <ClCompile Include="WinGameAch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AchievementManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
