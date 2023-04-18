@@ -89,3 +89,15 @@ void dae::GameObject::UpdateWorldPos()
 	}
 	m_isDirty = false;
 }
+
+void dae::GameObject::OnEvent(Event event)
+{
+	switch (event)
+	{
+	case dae::Observer::Event::PlayerDied:
+		
+		break;
+	default:
+		break;
+	}
+}

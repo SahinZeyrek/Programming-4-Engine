@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "Component.h"
 #include <vector>
+#include "Observer.h"
 #include <exception>
 namespace dae
 {
@@ -16,7 +17,7 @@ namespace dae
 			return "Invalid Parent";
 		}
 	};
-	class GameObject final
+	class GameObject final : public Observer
 	{
 		using GameObjectPtr = GameObject*;
 	public:
@@ -60,6 +61,7 @@ namespace dae
 		void RemoveComponent(Component* component);
 
 		Transform GetTransform() const{ return m_Transform;};
+		glm::vec3 GetLocalPosition() const { return m_Transform.GetPosition(); };
 		void SetSpeed(float speed) { m_Speed = speed; };
 		float GetSpeed() const { return m_Speed; };
 		void SetParent(GameObjectPtr go, bool keepWorldPos);
@@ -68,6 +70,8 @@ namespace dae
 		void SetPosition(float x, float y);
 		const glm::vec3& GetWorldPosition();
 		void UpdateWorldPos();
+		virtual void OnEvent(Event event) override;
+
 		GameObject() = default;
 		virtual ~GameObject();
 		GameObject(const GameObject& other) = delete;
