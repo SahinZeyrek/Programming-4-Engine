@@ -1,13 +1,13 @@
 #include "FPSComponent.h"
 #include "RenderTextComponent.h"
-#include "Time.h"
+#include "TimeUtil.h"
 #include "TextObject.h"
 #include "TextObject.h"
 namespace dae
 {
 	void FPSComponent::Update()
 	{
-		m_Timer += Time::deltaTime;
+		m_Timer += TimeUtil::deltaTime;
 		++m_FPS;
 		if (m_Timer > m_MaxTime)
 		{

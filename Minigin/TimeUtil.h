@@ -3,9 +3,9 @@
 // Hulp van Liam Wullaert
 // UTILITY STRUCT 
 
-struct Time final
+struct TimeUtil final
 {
-	Time() = delete; // prevent construction
+	TimeUtil() = delete; // prevent construction
 	static inline float deltaTime{ 0.0f }; 
 	static inline const float fixedDeltaTime{ 1 / 30.f }; // update of 30 fps
 	static inline constexpr float desiredFPS{ 144.f };

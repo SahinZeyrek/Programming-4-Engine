@@ -1,6 +1,6 @@
 #include "RotatorComponent.h"
 #include <glm/glm.hpp>
-#include "Time.h"
+#include "TimeUtil.h"
 #include "GameObject.h"
 #include "RenderTextureComponent.h"
 #include "Texture2D.h"
@@ -8,7 +8,7 @@ namespace dae
 {
 	void RotatorComponent::Update()
 	{
-		m_Angle += (m_AngleSpeed * Time::deltaTime);
+		m_Angle += (m_AngleSpeed * TimeUtil::deltaTime);
 		auto deg = glm::degrees(m_Angle);
 		float x = glm::cos(deg) * m_Radius + m_Offset.x/2.f;
 		float y = glm::sin(deg) * m_Radius + m_Offset.y/2.f;
