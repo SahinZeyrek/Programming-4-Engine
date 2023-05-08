@@ -45,7 +45,6 @@ namespace dae
 			return currentState.Gamepad.wButtons & button;
 		}
 	};
-	
 
 	void Controller::Update()
 	{

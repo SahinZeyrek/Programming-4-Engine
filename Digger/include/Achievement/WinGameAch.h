@@ -1,5 +1,5 @@
 #pragma once
-#include "Achievement.h"
+#include "Achievement/Achievement.h"
 #include "ScoreComponent.h"
 namespace dae
 {

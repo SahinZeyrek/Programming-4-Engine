@@ -8,17 +8,12 @@
 #endif
 
 #include "Minigin.h"
-#include "SceneManager.h"
-#include "InputManager.h"
-#include "AchievementManager.h"
+#include "Singleton/SceneManager.h"
+#include "Singleton/InputManager.h"
+#include "Singleton/AchievementManager.h"
 #include "SDL.h"
-#include "ResourceManager.h"
-#include "RenderTextureComponent.h"
-#include "RenderTextComponent.h"
-#include "FPSComponent.h"
-#include "TextObject.h"
-#include "RotatorComponent.h"
-#include "UIComponent.h"
+#include "Singleton/ResourceManager.h"
+#include "AllComponents.h"
 #include "Scene.h"
 #include "Controller.h"
 #include "AllCommands.h"
@@ -35,7 +30,7 @@ using namespace dae;
 void load()
 {
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
-
+	
 
 	GameObject* pBackground = new GameObject();
 	RenderTextureComponent* rt_Background = new RenderTextureComponent(pBackground, nullptr);
@@ -49,21 +44,22 @@ void load()
 	pBigTom->AddComponent(rtu_FunnyMan);
 	pBigTom->AddComponent(new HealthComponent(pBigTom, 3, 25));
 	pBigTom->AddComponent(new ScoreComponent(pBigTom, 0));
+	pBigTom->AddComponent(new SpeedComponent(pBigTom, 100.f));
 	pBigTom->GetComponent<RenderTextureComponent>()->SetTexture("funny-man.tga");
 	pBigTom->SetPosition(216, 180);
-	pBigTom->SetSpeed(150.f);
+	
 	scene.Add(pBigTom);
 
-	auto pTinyTom = new GameObject();
-	auto rtu_FunnyTinyMan = new RenderTextureComponent(pTinyTom, nullptr);
-	auto tinyTomHealth = new HealthComponent(pTinyTom, 3, 20);
-	pTinyTom->AddComponent(tinyTomHealth);
-	pTinyTom->AddComponent(rtu_FunnyTinyMan);
-	pTinyTom->AddComponent(new ScoreComponent(pTinyTom, 0));
-	pTinyTom->GetComponent<RenderTextureComponent>()->SetTexture("Digger.png");
-	pTinyTom->SetPosition(150, 120);
-	pTinyTom->SetSpeed(300.f);
-	scene.Add(pTinyTom);
+	auto pDigger = new GameObject();
+	auto diggerTexture = new RenderTextureComponent(pDigger, nullptr);
+	auto tinyTomHealth = new HealthComponent(pDigger, 3, 20);
+	pDigger->AddComponent(tinyTomHealth);
+	pDigger->AddComponent(diggerTexture);
+	pDigger->AddComponent(new ScoreComponent(pDigger, 0));
+	pDigger->AddComponent(new SpeedComponent(pDigger, 100.f));
+	pDigger->GetComponent<RenderTextureComponent>()->SetTexture("Digger.png");
+	pDigger->SetPosition(150, 120);
+	scene.Add(pDigger);
 
 #pragma endregion Players
 
@@ -74,7 +70,7 @@ void load()
 	auto renderLives = new RenderTextComponent(player1LivesUI, " ", pFont);
 	player1LivesUI->AddComponent(renderLives);
 
-	auto healthUIComp = new UIComponent(player1LivesUI, pTinyTom->GetComponent<HealthComponent>());
+	auto healthUIComp = new UIComponent(player1LivesUI, pDigger->GetComponent<HealthComponent>());
 	player1LivesUI->AddComponent(healthUIComp);
 
 	scene.Add(player1LivesUI);
@@ -85,7 +81,7 @@ void load()
 	auto renderScore = new RenderTextComponent(player1ScoreUI, " ", pFont);
 	player1ScoreUI->AddComponent(renderScore);
 
-	auto scoreUIComp = new UIComponent(player1ScoreUI, pTinyTom->GetComponent<ScoreComponent>());
+	auto scoreUIComp = new UIComponent(player1ScoreUI, pDigger->GetComponent<ScoreComponent>());
 	player1ScoreUI->AddComponent(scoreUIComp);
 
 	scene.Add(player1ScoreUI);
@@ -112,7 +108,7 @@ void load()
 	scene.Add(player2ScoreUI);
 	std::unique_ptr<WinGameAch> winGameAch = std::make_unique<WinGameAch>();
 	auto ach = AchievementManager::GetInstance().AddAchievement(std::move(winGameAch));
-	pTinyTom->GetComponent<ScoreComponent>()->BindOnScoreChanged(ach);
+	pDigger->GetComponent<ScoreComponent>()->BindOnScoreChanged(ach);
 	pBigTom->GetComponent<ScoreComponent>()->BindOnScoreChanged(ach);
 
 
@@ -124,51 +120,52 @@ void load()
 	//pGameObj->SetPosition(10, 5);
 	//scene.Add(pGameObj);
 
+	auto& inputManager = dae::InputManager::GetInstance();
 	//--------------------------------------------
 	// CONTROLLER
 	//--------------------------------------------
 	std::unique_ptr<Controller> controller = std::make_unique<Controller>(0);
-	InputManager::GetInstance().AddController(std::move(controller));
-	std::unique_ptr<MoveCommand> moveUpCommand = std::make_unique<MoveCommand>(pBigTom, glm::vec3{ 0,1,0 });
-	InputManager::GetInstance().AddMapping(0, std::move(moveUpCommand), Controller::ControllerButton::DPadUp);
+	inputManager.AddController(std::move(controller));
+	//std::unique_ptr<MoveCommand> moveUpCommand = std::make_unique<MoveCommand>(pBigTom, glm::vec3{ 0,1,0 });
+	//inputManager.AddMapping(0, std::move(moveUpCommand), Controller::ControllerButton::DPadUp);
 
-	std::unique_ptr<MoveCommand> moveDownCommand = std::make_unique<MoveCommand>(pBigTom, glm::vec3{ 0,-1,0 });
-	InputManager::GetInstance().AddMapping(0, std::move(moveDownCommand), Controller::ControllerButton::DPadDown);
+	//std::unique_ptr<MoveCommand> moveDownCommand = std::make_unique<MoveCommand>(pBigTom, glm::vec3{ 0,-1,0 });
+	//inputManager.AddMapping(0, std::move(moveDownCommand), Controller::ControllerButton::DPadDown);
 
-	std::unique_ptr<MoveCommand> moveRightCommand = std::make_unique<MoveCommand>(pBigTom, glm::vec3{ -1,0,0 });
-	InputManager::GetInstance().AddMapping(0, std::move(moveRightCommand), Controller::ControllerButton::DPadRight);
+	//std::unique_ptr<MoveCommand> moveRightCommand = std::make_unique<MoveCommand>(pBigTom, glm::vec3{ -1,0,0 });
+	//inputManager.AddMapping(0, std::move(moveRightCommand), Controller::ControllerButton::DPadRight);
 
-	std::unique_ptr<MoveCommand> moveLeftCommand = std::make_unique<MoveCommand>(pBigTom, glm::vec3{ 1,0,0 });
-	InputManager::GetInstance().AddMapping(0, std::move(moveLeftCommand), Controller::ControllerButton::DPadLeft);
+	//std::unique_ptr<MoveCommand> moveLeftCommand = std::make_unique<MoveCommand>(pBigTom, glm::vec3{ 1,0,0 });
+	//inputManager.AddMapping(0, std::move(moveLeftCommand), Controller::ControllerButton::DPadLeft);
 
 	std::unique_ptr<KillCommand> damageBigTom = std::make_unique<KillCommand>(pBigTom);
-	InputManager::GetInstance().AddMapping(0, std::move(damageBigTom), Controller::ControllerButton::RightShoulder);
+	inputManager.AddMapping(0, std::move(damageBigTom), Controller::ControllerButton::RightShoulder,dae::InputManager::inputCondition::Press );
 
 	std::unique_ptr<AddScoreCommand> addScoreBigTom = std::make_unique<AddScoreCommand>(pBigTom);
-	InputManager::GetInstance().AddMapping(0, std::move(addScoreBigTom), Controller::ControllerButton::ButtonX);
+	inputManager.AddMapping(0, std::move(addScoreBigTom), Controller::ControllerButton::ButtonX, dae::InputManager::inputCondition::Press);
 
 	//--------------------------------------------
 	// KEYBOARD
 	//--------------------------------------------
 #pragma region MOVE COMMANDS
-	std::unique_ptr<MoveCommand> kbmoveLeftCommand = std::make_unique<MoveCommand>(pTinyTom, glm::vec3{ 1,0,0 });
-	InputManager::GetInstance().AddKeyboardMapping(std::move(kbmoveLeftCommand), SDL_SCANCODE_A);
+	std::unique_ptr<MoveCommand> kbmoveLeftCommand = std::make_unique<MoveCommand>(pDigger, HeldDirection::Left );
+	inputManager.AddKeyboardMapping(std::move(kbmoveLeftCommand), SDL_SCANCODE_A,dae::InputManager::inputCondition::Hold);
 
-	std::unique_ptr<MoveCommand> kbmoveUpCommand = std::make_unique<MoveCommand>(pTinyTom, glm::vec3{ 0,1,0 });
-	InputManager::GetInstance().AddKeyboardMapping(std::move(kbmoveUpCommand), SDL_SCANCODE_W);
+	std::unique_ptr<MoveCommand> kbmoveUpCommand = std::make_unique<MoveCommand>(pDigger, HeldDirection::Up);
+	inputManager.AddKeyboardMapping(std::move(kbmoveUpCommand), SDL_SCANCODE_W, dae::InputManager::inputCondition::Hold);
 
-	std::unique_ptr<MoveCommand> kbmoveDownCommand = std::make_unique<MoveCommand>(pTinyTom, glm::vec3{ 0,-1,0 });
-	InputManager::GetInstance().AddKeyboardMapping(std::move(kbmoveDownCommand), SDL_SCANCODE_S);
+	std::unique_ptr<MoveCommand> kbmoveDownCommand = std::make_unique<MoveCommand>(pDigger, HeldDirection::Down);
+	inputManager.AddKeyboardMapping(std::move(kbmoveDownCommand), SDL_SCANCODE_S, dae::InputManager::inputCondition::Hold);
 
-	std::unique_ptr<MoveCommand> kbmoveRightCommand = std::make_unique<MoveCommand>(pTinyTom, glm::vec3{ -1,0,0 });
-	InputManager::GetInstance().AddKeyboardMapping(std::move(kbmoveRightCommand), SDL_SCANCODE_D);
+	std::unique_ptr<MoveCommand> kbmoveRightCommand = std::make_unique<MoveCommand>(pDigger, HeldDirection::Right);
+	inputManager.AddKeyboardMapping(std::move(kbmoveRightCommand), SDL_SCANCODE_D, dae::InputManager::inputCondition::Hold);
 #pragma endregion MOVE COMMANDS
 
-	std::unique_ptr<KillCommand> kbDamageTinyTom = std::make_unique<KillCommand>(pTinyTom);
-	InputManager::GetInstance().AddKeyboardMapping(std::move(kbDamageTinyTom), SDL_SCANCODE_R);
+	std::unique_ptr<KillCommand> kbDamageTinyTom = std::make_unique<KillCommand>(pDigger);
+	inputManager.AddKeyboardMapping(std::move(kbDamageTinyTom), SDL_SCANCODE_R, dae::InputManager::inputCondition::Press);
 
-	std::unique_ptr<AddScoreCommand> kbAddScoreTinyTom = std::make_unique<AddScoreCommand>(pTinyTom);
-	InputManager::GetInstance().AddKeyboardMapping(std::move(kbAddScoreTinyTom), SDL_SCANCODE_Q);
+	std::unique_ptr<AddScoreCommand> kbAddScoreTinyTom = std::make_unique<AddScoreCommand>(pDigger);
+	inputManager.AddKeyboardMapping(std::move(kbAddScoreTinyTom), SDL_SCANCODE_Q, dae::InputManager::inputCondition::Press);
 
 
 

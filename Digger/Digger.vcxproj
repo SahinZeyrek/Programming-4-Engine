@@ -81,7 +81,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\Minigin;$(SolutionDir)\3rdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\Minigin\include;$(SolutionDir)\3rdParty\glm;$(SolutionDir)Digger\include;$(SolutionDir)Digger\include\Achievement;$(SolutionDir)Digger\include\Components;$(SolutionDir)Digger\include\Commands;$(SolutionDir)\Minigin\include\Achievement;$(SolutionDir)\Minigin\include\Singleton;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -99,7 +99,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\Minigin;$(SolutionDir)\3rdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\Minigin\include;$(SolutionDir)\3rdParty\glm;$(SolutionDir)Digger\include;$(SolutionDir)Digger\include\Achievement;$(SolutionDir)Digger\include\Components;$(SolutionDir)Digger\include\Commands;$(SolutionDir)\Minigin\include\Achievement;$(SolutionDir)\Minigin\include\Singleton;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -117,7 +117,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\Minigin;$(SolutionDir)\3rdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\Minigin\include;$(SolutionDir)\3rdParty\glm;$(SolutionDir)Digger\include;$(SolutionDir)Digger\include\Achievement;$(SolutionDir)Digger\include\Components;$(SolutionDir)Digger\include\Commands;$(SolutionDir)\Minigin\include\Achievement;$(SolutionDir)\Minigin\include\Singleton;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -135,7 +135,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\Minigin;$(SolutionDir)\3rdParty\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\Minigin\include;$(SolutionDir)\3rdParty\glm;$(SolutionDir)Digger\include;$(SolutionDir)Digger\include\Achievement;$(SolutionDir)Digger\include\Components;$(SolutionDir)Digger\include\Commands;$(SolutionDir)\Minigin\include\Achievement;$(SolutionDir)\Minigin\include\Singleton;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -147,27 +147,42 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Minigin\AddScoreCommand.cpp" />
-    <ClCompile Include="..\Minigin\KillCommand.cpp" />
-    <ClCompile Include="..\Minigin\MoveCommand.cpp" />
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Minigin\Minigin.vcxproj">
       <Project>{41b0ec47-d48c-4b0f-951b-d98595ffae0a}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Minigin\AddScoreCommand.h" />
-    <ClInclude Include="..\Minigin\FPSComponent.h" />
-    <ClInclude Include="..\Minigin\HealthComponent.h" />
-    <ClInclude Include="..\Minigin\KillCommand.h" />
-    <ClInclude Include="..\Minigin\MoveCommand.h" />
-    <ClInclude Include="..\Minigin\RenderTextComponent.h" />
-    <ClInclude Include="..\Minigin\RenderTextureComponent.h" />
-    <ClInclude Include="..\Minigin\RotatorComponent.h" />
-    <ClInclude Include="..\Minigin\ScoreComponent.h" />
-    <ClInclude Include="..\Minigin\UIComponent.h" />
+    <ClInclude Include="AllCommands.h" />
+    <ClInclude Include="AllComponents.h" />
+    <ClInclude Include="include\Achievement\WinGameAch.h" />
+    <ClInclude Include="include\Commands\AddScoreCommand.h" />
+    <ClInclude Include="include\Commands\KillCommand.h" />
+    <ClInclude Include="include\Commands\MoveCommand.h" />
+    <ClInclude Include="include\Commands\RotatorComponent.h" />
+    <ClInclude Include="include\Commands\StopMovingCommand.h" />
+    <ClInclude Include="include\Components\FPSComponent.h" />
+    <ClInclude Include="include\Components\HealthComponent.h" />
+    <ClInclude Include="include\Components\RenderTextComponent.h" />
+    <ClInclude Include="include\Components\RenderTextureComponent.h" />
+    <ClInclude Include="include\Components\ScoreComponent.h" />
+    <ClInclude Include="include\Components\SpeedComponent.h" />
+    <ClInclude Include="include\Components\UIComponent.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\Achievement\WinGameAch.cpp" />
+    <ClCompile Include="source\Commands\AddScoreCommand.cpp" />
+    <ClCompile Include="source\Commands\KillCommand.cpp" />
+    <ClCompile Include="source\Commands\MoveCommand.cpp" />
+    <ClCompile Include="source\Commands\RotatorComponent.cpp" />
+    <ClCompile Include="source\Commands\StopMovingCommand.cpp" />
+    <ClCompile Include="source\Components\FPSComponent.cpp" />
+    <ClCompile Include="source\Components\HealthComponent.cpp" />
+    <ClCompile Include="source\Components\RenderTextComponent.cpp" />
+    <ClCompile Include="source\Components\RenderTextureComponent.cpp" />
+    <ClCompile Include="source\Components\ScoreComponent.cpp" />
+    <ClCompile Include="source\Components\SpeedComponent.cpp" />
+    <ClCompile Include="source\Components\UIComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

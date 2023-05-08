@@ -1,0 +1,9 @@
+#pragma once
+#include "FPSComponent.h"
+#include "HealthComponent.h"
+#include "RenderTextComponent.h"
+#include "RenderTextureComponent.h"
+#include "RotatorComponent.h"
+#include "ScoreComponent.h"
+#include "SpeedComponent.h"
+#include "UIComponent.h"

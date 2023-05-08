@@ -62,8 +62,6 @@ namespace dae
 
 		Transform GetTransform() const{ return m_Transform;};
 		glm::vec3 GetLocalPosition() const { return m_Transform.GetPosition(); };
-		void SetSpeed(float speed) { m_Speed = speed; };
-		float GetSpeed() const { return m_Speed; };
 		void SetParent(GameObjectPtr go, bool keepWorldPos);
 		void Update();
 		void Render() const;
@@ -83,7 +81,6 @@ namespace dae
 
 		Transform m_Transform{};
 		glm::vec3 m_worldPos{};
-		float m_Speed{};
 
 		std::vector<Component*> m_pComponents{};
 		std::vector<Component*> m_pMarkedForRemoval{};

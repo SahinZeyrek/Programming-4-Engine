@@ -2,7 +2,7 @@
 #include "RenderTextComponent.h"
 #include "TimeUtil.h"
 #include "TextObject.h"
-#include "TextObject.h"
+
 namespace dae
 {
 	void FPSComponent::Update()
