@@ -89,6 +89,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;Xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\SDL2_mixer.dll" "$(OutputPath)" /R /Y
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -109,6 +113,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;Xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\SDL2_mixer.dll" "$(OutputPath)" /R /Y
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -125,6 +133,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;Xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\SDL2_mixer.dll" "$(OutputPath)" /R /Y
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -145,6 +157,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;Xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\SDL2_mixer.dll" "$(OutputPath)" /R /Y
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minigin\Minigin.vcxproj">
@@ -154,11 +170,13 @@
   <ItemGroup>
     <ClInclude Include="AllCommands.h" />
     <ClInclude Include="AllComponents.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="GridRenderer.h" />
     <ClInclude Include="include\Achievement\WinGameAch.h" />
     <ClInclude Include="include\Commands\AddScoreCommand.h" />
     <ClInclude Include="include\Commands\KillCommand.h" />
     <ClInclude Include="include\Commands\MoveCommand.h" />
-    <ClInclude Include="include\Commands\RotatorComponent.h" />
+    <ClInclude Include="include\Components\RotatorComponent.h" />
     <ClInclude Include="include\Commands\StopMovingCommand.h" />
     <ClInclude Include="include\Components\FPSComponent.h" />
     <ClInclude Include="include\Components\HealthComponent.h" />
@@ -169,6 +187,8 @@
     <ClInclude Include="include\Components\UIComponent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="GridRenderer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\Achievement\WinGameAch.cpp" />
     <ClCompile Include="source\Commands\AddScoreCommand.cpp" />

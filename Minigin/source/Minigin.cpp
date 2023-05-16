@@ -10,6 +10,8 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include <chrono>
+#include <SDL_mixer.h>
+
 #include "TimeUtil.h"
 #include <thread>
 #include "imgui.h"
@@ -51,17 +53,19 @@ dae::Minigin::Minigin(const std::string &dataPath)
 {
 	PrintSDLVersion();
 	
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) 
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) 
 	{
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
 	}
+	Mix_Init(MIX_INIT_MP3);
+	Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 2048);
 
 	g_window = SDL_CreateWindow(
 		"Digger",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
 		800,
-		850,
+		840,
 		SDL_WINDOW_OPENGL
 	);
 	if (g_window == nullptr) 
@@ -79,7 +83,10 @@ dae::Minigin::~Minigin()
 	Renderer::GetInstance().Destroy();
 	SDL_DestroyWindow(g_window);
 	g_window = nullptr;
+	Mix_CloseAudio();
+	Mix_Quit();
 	SDL_Quit();
+	
 }
 
 void dae::Minigin::Run(const std::function<void()>& load)

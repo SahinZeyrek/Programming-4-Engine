@@ -102,7 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>IMGUI_DEFINE_MATH_OPERATORS;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\glm;$(SolutionDir)\Minigin\include;$(SolutionDir)\Minigin\include\Achievement;$(SolutionDir)\Minigin\include\Singleton;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\glm;$(SolutionDir)\Minigin\include;$(SolutionDir)\Minigin\include\Achievement;$(SolutionDir)\Minigin\include\Singleton;$(SolutionDir)\3rdParty\SDL2_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -118,8 +118,8 @@
       </Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\3rdParty\SDL2\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_image\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_ttf\lib\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\3rdParty\SDL2\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_image\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_ttf\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_mixer\lib\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -129,7 +129,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>IMGUI_DEFINE_MATH_OPERATORS;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\glm;$(SolutionDir)\Minigin\include;$(SolutionDir)\Minigin\include\Achievement;$(SolutionDir)\Minigin\include\Singleton;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\glm;$(SolutionDir)\Minigin\include;$(SolutionDir)\Minigin\include\Achievement;$(SolutionDir)\Minigin\include\Singleton;$(SolutionDir)\3rdParty\SDL2_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -145,8 +145,8 @@
       </Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\3rdParty\SDL2\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_image\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_ttf\lib\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\3rdParty\SDL2\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_image\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_ttf\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_mixer\lib\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -158,7 +158,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>IMGUI_DEFINE_MATH_OPERATORS;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\glm;$(SolutionDir)\Minigin\include;$(SolutionDir)\Minigin\include\Achievement;$(SolutionDir)\Minigin\include\Singleton;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\glm;$(SolutionDir)\Minigin\include;$(SolutionDir)\Minigin\include\Achievement;$(SolutionDir)\Minigin\include\Singleton;$(SolutionDir)\3rdParty\SDL2_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -176,8 +176,8 @@
       </Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\3rdParty\SDL2\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_image\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_ttf\lib\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\3rdParty\SDL2\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_image\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_ttf\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_mixer\lib\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -189,7 +189,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>IMGUI_DEFINE_MATH_OPERATORS;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\glm;$(SolutionDir)\Minigin\include;$(SolutionDir)\Minigin\include\Achievement;$(SolutionDir)\Minigin\include\Singleton;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\3rdParty\imgui;$(SolutionDir)\3rdParty\imgui\backends;$(SolutionDir)\3rdParty\glm;$(SolutionDir)\Minigin\include;$(SolutionDir)\Minigin\include\Achievement;$(SolutionDir)\Minigin\include\Singleton;$(SolutionDir)\3rdParty\SDL2_mixer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
@@ -208,11 +208,13 @@
       </Command>
     </PostBuildEvent>
     <Lib>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\3rdParty\SDL2\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_image\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_ttf\lib\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\3rdParty\SDL2\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_image\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_ttf\lib\$(PlatformShortName);$(SolutionDir)\3rdParty\SDL2_mixer\lib\$(PlatformShortName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\AudioClip.h" />
+    <ClInclude Include="include\Singleton\AudioManager.h" />
     <ClInclude Include="include\Achievement\Achievement.h" />
     <ClInclude Include="include\Command.h" />
     <ClInclude Include="include\Common.h" />
@@ -236,8 +238,18 @@
     <ClInclude Include="include\Texture2D.h" />
     <ClInclude Include="include\TimeUtil.h" />
     <ClInclude Include="include\Transform.h" />
+    <ClInclude Include="include\ISoundSystem.h" />
+    <ClInclude Include="include\NullSoundSys.h" />
+    <ClInclude Include="SDLSoundSys.h" />
+    <ClInclude Include="ServiceLocator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ServiceLocator.cpp" />
+    <ClCompile Include="source\AudioClip.cpp" />
+    <ClCompile Include="source\Singleton\AudioManager.cpp" />
+    <ClCompile Include="SDLSoundSys.cpp" />
+    <ClCompile Include="source\NullSoundSys.cpp" />
+    <ClCompile Include="source\ISoundSystem.cpp" />
     <ClCompile Include="source\Achievement\Achievement.cpp" />
     <ClCompile Include="source\Achievement\AchievementManager.cpp" />
     <ClCompile Include="source\Component.cpp" />

@@ -7,3 +7,4 @@
 #include "ScoreComponent.h"
 #include "SpeedComponent.h"
 #include "UIComponent.h"
+#include "GridRenderer.h"

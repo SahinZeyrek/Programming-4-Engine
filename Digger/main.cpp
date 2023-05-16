@@ -19,6 +19,7 @@
 #include "AllCommands.h"
 #include <iostream>
 #include "WinGameAch.h"
+#include "Grid.h"
 
 
 
@@ -36,7 +37,7 @@ void load()
 	RenderTextureComponent* rt_Background = new RenderTextureComponent(pBackground, nullptr);
 	pBackground->AddComponent(rt_Background);
 	pBackground->GetComponent<RenderTextureComponent>()->SetTexture("Level1 Background.png");
-	pBackground->SetPosition(0, 50);
+	pBackground->SetPosition(0, 40);
 	scene.Add(pBackground);
 #pragma region Players
 	auto pBigTom = new GameObject();
@@ -50,6 +51,8 @@ void load()
 	
 	scene.Add(pBigTom);
 
+	std::shared_ptr<Grid> pGrid = std::make_shared<Grid>(20,20,40);
+
 	auto pDigger = new GameObject();
 	auto diggerTexture = new RenderTextureComponent(pDigger, nullptr);
 	auto tinyTomHealth = new HealthComponent(pDigger, 3, 20);
@@ -57,6 +60,7 @@ void load()
 	pDigger->AddComponent(diggerTexture);
 	pDigger->AddComponent(new ScoreComponent(pDigger, 0));
 	pDigger->AddComponent(new SpeedComponent(pDigger, 100.f));
+	pDigger->AddComponent(new GridRenderer(pDigger, pGrid));
 	pDigger->GetComponent<RenderTextureComponent>()->SetTexture("Digger.png");
 	pDigger->SetPosition(150, 120);
 	scene.Add(pDigger);
