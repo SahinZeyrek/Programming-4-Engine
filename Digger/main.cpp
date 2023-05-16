@@ -20,11 +20,9 @@
 #include <iostream>
 #include "WinGameAch.h"
 #include "Grid.h"
-
-
-
-
-
+#include "../SDLSoundSys.h"
+#include "../ServiceLocator.h"
+#include "../LogSoundSys.h"
 
 using namespace dae;
 
@@ -32,6 +30,16 @@ void load()
 {
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 	
+#if _DEBUG
+	ServiceLocator::RegisterSoundSystem(std::make_unique<LogSoundSys>(std::make_unique<SDLSoundSys>()));
+#else
+	ServiceLocator::RegisterSoundSystem(std::make_unique<SDLSoundSys>());
+#endif
+
+	ServiceLocator::GetSoundSystem().SetVolume(1.f);
+	std::cout << "-------------------------------------------------------------------------------\n";
+	std::cout << "PRESS Q TO PLAY A SOUND (might be loud, careful even though volume is set to 1)\n";
+	std::cout << "-------------------------------------------------------------------------------\n";
 
 	GameObject* pBackground = new GameObject();
 	RenderTextureComponent* rt_Background = new RenderTextureComponent(pBackground, nullptr);

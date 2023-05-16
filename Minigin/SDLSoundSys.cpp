@@ -11,6 +11,41 @@ namespace dae
 		m_Condition.notify_one();
 	}
 
+	void SDLSoundSys::SetPause(bool setPause)
+	{
+		// i know its really strange code but im on my last legs right now,
+		// hello to the people in the class if i make it on the slides :)
+		for (int i{0 } ; i < m_AudioQueue.size(); ++i)
+		{
+			auto path = std::move(m_AudioQueue.front());
+			m_AudioQueue.pop();
+			AudioManager::GetInstance().GetAudioClip(path)->SetPause(setPause);
+			m_AudioQueue.emplace(std::move(path));
+		}
+	}
+
+	void SDLSoundSys::SetMute(bool setMute)
+	{
+		for (int i{ 0 }; i < m_AudioQueue.size(); ++i)
+		{
+			auto path = std::move(m_AudioQueue.front());
+			m_AudioQueue.pop();
+			AudioManager::GetInstance().GetAudioClip(path)->SetMute(setMute);
+			m_AudioQueue.emplace(std::move(path));
+		}
+	}
+
+	void SDLSoundSys::SetVolume(const float volume)
+	{
+		for (int i{ 0 }; i < m_AudioQueue.size(); ++i)
+		{
+			auto path = std::move(m_AudioQueue.front());
+			m_AudioQueue.pop();
+			AudioManager::GetInstance().GetAudioClip(path)->SetVolume(volume);
+			m_AudioQueue.emplace(std::move(path));
+		}
+	}
+
 	SDLSoundSys::~SDLSoundSys()
 	{
 		m_CanJoin = true;

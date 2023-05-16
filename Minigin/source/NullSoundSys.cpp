@@ -2,29 +2,22 @@
 #include "iostream"
 namespace dae
 {
-	void NullSoundSys::Play(const sound_id , const float )
+
+
+	void NullSoundSys::Play(const std::string& )
 	{
-		std::cout << "DEFAULT SOUND SYSTEM\n";
 	}
 
-	void NullSoundSys::TogglePause(bool)
+	void NullSoundSys::SetPause(bool )
 	{
-		std::cout << "DEFAULT SOUND SYSTEM\n";
 	}
 
-	void NullSoundSys::ToggleMute(bool)
+	void NullSoundSys::SetMute(bool )
 	{
-		std::cout << "DEFAULT SOUND SYSTEM\n";
 	}
 
 	void NullSoundSys::SetVolume(const float)
 	{
-		std::cout << "DEFAULT SOUND SYSTEM\n";
-	}
-
-	void NullSoundSys::Load(const std::string& file)
-	{
-		std::cout << "DEFAULT SOUND SYSTEM\n";
 	}
 }
 

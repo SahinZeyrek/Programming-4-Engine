@@ -13,7 +13,6 @@ namespace dae
 			{
 				Cell currentPoint{ m_CellSize * i, m_CellSize * j + m_ScreenOffset,m_CellSize };
 				currentPoint.index = static_cast<int>(j + i * static_cast<float>(m_Cols));
-				std::cout << "Index is " << currentPoint.index << '\n';
 				m_Cells.push_back(currentPoint);
 			}
 		}

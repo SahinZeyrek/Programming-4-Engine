@@ -1,5 +1,5 @@
 #include "AudioManager.h"
-
+#include <algorithm>
 namespace dae
 {
 	void AudioManager::AddAudioClip(const std::string& path, bool preLoad)

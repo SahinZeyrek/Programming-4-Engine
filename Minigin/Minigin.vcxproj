@@ -240,10 +240,12 @@
     <ClInclude Include="include\Transform.h" />
     <ClInclude Include="include\ISoundSystem.h" />
     <ClInclude Include="include\NullSoundSys.h" />
+    <ClInclude Include="LogSoundSys.h" />
     <ClInclude Include="SDLSoundSys.h" />
     <ClInclude Include="ServiceLocator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LogSoundSys.cpp" />
     <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="source\AudioClip.cpp" />
     <ClCompile Include="source\Singleton\AudioManager.cpp" />

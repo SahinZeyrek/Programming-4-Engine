@@ -44,7 +44,15 @@ namespace dae
 			{
 				std::cout << "Sound effect was not loaded.\n";
 			}
-			Mix_PlayChannel(-1, m_SoundEffect, 0);
+			bool isPlaying{ false };
+			if (Mix_Playing(-1))
+			{
+				isPlaying = true;
+			}
+			if (!isPlaying)
+			{
+				Mix_PlayChannel(-1, m_SoundEffect, 0);
+			}
 		}
 		void SetPause(bool setPause)
 		{
@@ -67,6 +75,10 @@ namespace dae
 			m_Volume = volume;
 			Mix_Volume(-1, static_cast<int>(m_Volume));
 		}
+		float GetVolume() const
+		{
+			return m_Volume;
+		}
 	private:
 		float m_Volume{ 50.f };
 		const std::string m_Path;
@@ -84,7 +96,7 @@ namespace dae
 
 	bool AudioClip::IsLoaded() const
 	{
-		m_Pimpl->IsLoaded();
+		return m_Pimpl->IsLoaded();
 	}
 
 	void AudioClip::SetPause(bool setPause)
@@ -95,6 +107,16 @@ namespace dae
 	void AudioClip::SetMute(bool setMute)
 	{
 		m_Pimpl->SetMute(setMute);
+	}
+
+	void AudioClip::SetVolume(const float volume)
+	{
+		m_Pimpl->SetVolume(volume);
+	}
+
+	float AudioClip::GetVolume() const
+	{
+		return m_Pimpl->GetVolume();
 	}
 
 	AudioClip::AudioClip(const std::string& path, bool preLoad)

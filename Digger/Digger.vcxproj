@@ -185,11 +185,13 @@
     <ClInclude Include="include\Components\ScoreComponent.h" />
     <ClInclude Include="include\Components\SpeedComponent.h" />
     <ClInclude Include="include\Components\UIComponent.h" />
+    <ClInclude Include="include\Components\SoundComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridRenderer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\Components\SoundComponent.cpp" />
     <ClCompile Include="source\Achievement\WinGameAch.cpp" />
     <ClCompile Include="source\Commands\AddScoreCommand.cpp" />
     <ClCompile Include="source\Commands\KillCommand.cpp" />

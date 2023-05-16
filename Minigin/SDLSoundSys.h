@@ -9,10 +9,13 @@ namespace dae
 	{
 	public:
 		virtual void Play(const std::string& path) override;
+		virtual void SetPause(bool setPause) override;
+		virtual void SetMute(bool setMute) override;
+		virtual void SetVolume(const float volume) override;
 		virtual ~SDLSoundSys() override;
 		SDLSoundSys()
 		{
-			m_Thread = std::jthread(&FlushQueue, this);
+			m_Thread = std::jthread(&SDLSoundSys::FlushQueue, this);
 		}
 		SDLSoundSys(const SDLSoundSys& other) = delete;
 		SDLSoundSys(SDLSoundSys&& other) = delete;

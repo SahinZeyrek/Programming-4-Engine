@@ -14,7 +14,8 @@ namespace dae
 		bool IsLoaded() const;
 		void SetPause(bool setPause);
 		void SetMute(bool setMute);
-
+		void SetVolume(const float volume);
+		float GetVolume() const;
 		~AudioClip();
 	private:
 	};

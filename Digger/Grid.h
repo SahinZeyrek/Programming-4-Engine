@@ -8,7 +8,7 @@ namespace dae
         struct Cell
         {
             Cell(float xPos, float yPos, int _cellSize) { location.x = xPos, location.y = yPos,cellSize = _cellSize; };
-            bool isActive{ false };
+            bool isActive{ true };
             int cellSize{}, index{};
             glm::vec2 location{};
         };
