@@ -114,8 +114,14 @@
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\SDL2_mixer.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2\lib\$(PlatformTarget)\SDL2.dll" "$(OutputPath)" /R /Y
+
+xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\$(PlatformTarget)\SDL2_image.dll" "$(OutputPath)" /R /Y
+
+
+xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\SDL2_ttf.dll" "$(OutputPath)" /R /Y
+</Command>
     </PostBuildEvent>
     <Lib>
       <AdditionalDependencies>SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -141,8 +147,14 @@
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\SDL2_mixer.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2\lib\$(PlatformTarget)\SDL2.dll" "$(OutputPath)" /R /Y
+
+xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\$(PlatformTarget)\SDL2_image.dll" "$(OutputPath)" /R /Y
+
+
+xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\SDL2_ttf.dll" "$(OutputPath)" /R /Y
+</Command>
     </PostBuildEvent>
     <Lib>
       <AdditionalDependencies>SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -172,8 +184,14 @@
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\SDL2_mixer.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2\lib\$(PlatformTarget)\SDL2.dll" "$(OutputPath)" /R /Y
+
+xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\$(PlatformTarget)\SDL2_image.dll" "$(OutputPath)" /R /Y
+
+
+xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\SDL2_ttf.dll" "$(OutputPath)" /R /Y
+</Command>
     </PostBuildEvent>
     <Lib>
       <AdditionalDependencies>SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -204,8 +222,14 @@
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\SDL2_mixer.dll" "$(OutputPath)" /R /Y
+xcopy "$(SolutionDir)3rdParty\SDL2\lib\$(PlatformTarget)\SDL2.dll" "$(OutputPath)" /R /Y
+
+xcopy "$(SolutionDir)3rdParty\SDL2_image\lib\$(PlatformTarget)\SDL2_image.dll" "$(OutputPath)" /R /Y
+
+
+xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\SDL2_ttf.dll" "$(OutputPath)" /R /Y
+</Command>
     </PostBuildEvent>
     <Lib>
       <AdditionalDependencies>SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -213,8 +237,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\AudioClip.h" />
-    <ClInclude Include="include\Singleton\AudioManager.h" />
+    <ClInclude Include="include\sound\AudioClip.h" />
+    <ClInclude Include="include\sound\DefaultSoundSystem.h" />
     <ClInclude Include="include\Achievement\Achievement.h" />
     <ClInclude Include="include\Command.h" />
     <ClInclude Include="include\Common.h" />
@@ -238,20 +262,16 @@
     <ClInclude Include="include\Texture2D.h" />
     <ClInclude Include="include\TimeUtil.h" />
     <ClInclude Include="include\Transform.h" />
-    <ClInclude Include="include\ISoundSystem.h" />
-    <ClInclude Include="include\NullSoundSys.h" />
-    <ClInclude Include="LogSoundSys.h" />
-    <ClInclude Include="SDLSoundSys.h" />
-    <ClInclude Include="ServiceLocator.h" />
+    <ClInclude Include="include\sound\ISoundSystem.h" />
+    <ClInclude Include="include\sound\NullSoundSys.h" />
+    <ClInclude Include="include\sound\LogSoundSys.h" />
+    <ClInclude Include="include\ServiceLocator.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LogSoundSys.cpp" />
-    <ClCompile Include="ServiceLocator.cpp" />
-    <ClCompile Include="source\AudioClip.cpp" />
-    <ClCompile Include="source\Singleton\AudioManager.cpp" />
-    <ClCompile Include="SDLSoundSys.cpp" />
-    <ClCompile Include="source\NullSoundSys.cpp" />
-    <ClCompile Include="source\ISoundSystem.cpp" />
+    <ClCompile Include="source\sound\LogSoundSys.cpp" />
+    <ClCompile Include="source\ServiceLocator.cpp" />
+    <ClCompile Include="source\sound\AudioClip.cpp" />
+    <ClCompile Include="source\sound\ISoundSystem.cpp" />
     <ClCompile Include="source\Achievement\Achievement.cpp" />
     <ClCompile Include="source\Achievement\AchievementManager.cpp" />
     <ClCompile Include="source\Component.cpp" />
@@ -266,6 +286,7 @@
     <ClCompile Include="source\Singleton\Renderer.cpp" />
     <ClCompile Include="source\Singleton\ResourceManager.cpp" />
     <ClCompile Include="source\Singleton\SceneManager.cpp" />
+    <ClCompile Include="source\sound\DefaultSoundSystem.cpp" />
     <ClCompile Include="source\Subject.cpp" />
     <ClCompile Include="source\Texture2D.cpp" />
     <ClCompile Include="source\Transform.cpp" />

@@ -108,25 +108,22 @@
     <ClInclude Include="include\Achievement\Achievement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ISoundSystem.h">
+    <ClInclude Include="include\sound\ISoundSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\NullSoundSys.h">
+    <ClInclude Include="include\sound\NullSoundSys.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SDLSoundSys.h">
+    <ClInclude Include="include\sound\AudioClip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Singleton\AudioManager.h">
+    <ClInclude Include="include\ServiceLocator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\AudioClip.h">
+    <ClInclude Include="include\sound\LogSoundSys.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ServiceLocator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LogSoundSys.h">
+    <ClInclude Include="include\sound\DefaultSoundSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -182,25 +179,19 @@
     <ClCompile Include="source\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\ISoundSystem.cpp">
+    <ClCompile Include="source\sound\ISoundSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\NullSoundSys.cpp">
+    <ClCompile Include="source\sound\AudioClip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SDLSoundSys.cpp">
+    <ClCompile Include="source\ServiceLocator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Singleton\AudioManager.cpp">
+    <ClCompile Include="source\sound\LogSoundSys.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\AudioClip.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ServiceLocator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LogSoundSys.cpp">
+    <ClCompile Include="source\sound\DefaultSoundSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,18 +11,20 @@
 #include "Singleton/SceneManager.h"
 #include "Singleton/InputManager.h"
 #include "Singleton/AchievementManager.h"
-#include "SDL.h"
 #include "Singleton/ResourceManager.h"
 #include "AllComponents.h"
 #include "Scene.h"
 #include "Controller.h"
 #include "AllCommands.h"
-#include <iostream>
 #include "WinGameAch.h"
+#include "SoundComponent.h"
 #include "Grid.h"
-#include "../SDLSoundSys.h"
-#include "../ServiceLocator.h"
-#include "../LogSoundSys.h"
+
+#include "ServiceLocator.h"
+#include "sound/DefaultSoundSystem.h"
+#include "sound/LogSoundSys.h"
+
+#include <iostream>
 
 using namespace dae;
 
@@ -31,9 +33,9 @@ void load()
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 	
 #if _DEBUG
-	ServiceLocator::RegisterSoundSystem(std::make_unique<LogSoundSys>(std::make_unique<SDLSoundSys>()));
+	ServiceLocator::RegisterSoundSystem(std::make_unique<LogSoundSys>(std::make_unique<DefaultSoundSystem>()));
 #else
-	ServiceLocator::RegisterSoundSystem(std::make_unique<SDLSoundSys>());
+	ServiceLocator::RegisterSoundSystem(std::make_unique<DefaultSoundSystem>());
 #endif
 
 	ServiceLocator::GetSoundSystem().SetVolume(1.f);
@@ -64,11 +66,12 @@ void load()
 	auto pDigger = new GameObject();
 	auto diggerTexture = new RenderTextureComponent(pDigger, nullptr);
 	auto tinyTomHealth = new HealthComponent(pDigger, 3, 20);
+	pDigger->AddComponent(new GridRenderer(pDigger, pGrid));
 	pDigger->AddComponent(tinyTomHealth);
 	pDigger->AddComponent(diggerTexture);
 	pDigger->AddComponent(new ScoreComponent(pDigger, 0));
 	pDigger->AddComponent(new SpeedComponent(pDigger, 100.f));
-	pDigger->AddComponent(new GridRenderer(pDigger, pGrid));
+	pDigger->AddComponent(new SoundComponent(pDigger, "aughh.wav", 0.1f));
 	pDigger->GetComponent<RenderTextureComponent>()->SetTexture("Digger.png");
 	pDigger->SetPosition(150, 120);
 	scene.Add(pDigger);
