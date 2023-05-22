@@ -170,8 +170,8 @@
   <ItemGroup>
     <ClInclude Include="AllCommands.h" />
     <ClInclude Include="AllComponents.h" />
-    <ClInclude Include="Grid.h" />
-    <ClInclude Include="GridRenderer.h" />
+    <ClInclude Include="include\Grid.h" />
+    <ClInclude Include="include\Components\GridRenderer.h" />
     <ClInclude Include="include\Achievement\WinGameAch.h" />
     <ClInclude Include="include\Commands\AddScoreCommand.h" />
     <ClInclude Include="include\Commands\KillCommand.h" />
@@ -186,17 +186,18 @@
     <ClInclude Include="include\Components\SpeedComponent.h" />
     <ClInclude Include="include\Components\UIComponent.h" />
     <ClInclude Include="include\Components\SoundComponent.h" />
+    <ClInclude Include="include\Commands\StartMovingCommand.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Grid.cpp" />
-    <ClCompile Include="GridRenderer.cpp" />
+    <ClCompile Include="source\Grid.cpp" />
+    <ClCompile Include="source\Components\GridRenderer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\Components\SoundComponent.cpp" />
     <ClCompile Include="source\Achievement\WinGameAch.cpp" />
     <ClCompile Include="source\Commands\AddScoreCommand.cpp" />
     <ClCompile Include="source\Commands\KillCommand.cpp" />
     <ClCompile Include="source\Commands\MoveCommand.cpp" />
-    <ClCompile Include="source\Commands\RotatorComponent.cpp" />
+    <ClCompile Include="source\Components\RotatorComponent.cpp" />
     <ClCompile Include="source\Commands\StopMovingCommand.cpp" />
     <ClCompile Include="source\Components\FPSComponent.cpp" />
     <ClCompile Include="source\Components\HealthComponent.cpp" />
@@ -205,6 +206,7 @@
     <ClCompile Include="source\Components\ScoreComponent.cpp" />
     <ClCompile Include="source\Components\SpeedComponent.cpp" />
     <ClCompile Include="source\Components\UIComponent.cpp" />
+    <ClCompile Include="source\Commands\StartMovingCommand.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

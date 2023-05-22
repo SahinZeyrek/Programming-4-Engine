@@ -1,11 +1,11 @@
 #pragma once
 #include "Component.h"
 #include "ResourceManager.h"
+#include "Texture2D.h"
 #include "Renderer.h"
 #include <string>
 namespace dae
 {
-	class Texture2D;
 
 	class RenderTextureComponent final : public Component
 	{

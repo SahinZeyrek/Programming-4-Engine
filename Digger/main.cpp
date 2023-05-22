@@ -31,7 +31,7 @@ using namespace dae;
 void load()
 {
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
-	
+
 #if _DEBUG
 	ServiceLocator::RegisterSoundSystem(std::make_unique<LogSoundSys>(std::make_unique<DefaultSoundSystem>()));
 #else
@@ -58,10 +58,34 @@ void load()
 	pBigTom->AddComponent(new SpeedComponent(pBigTom, 100.f));
 	pBigTom->GetComponent<RenderTextureComponent>()->SetTexture("funny-man.tga");
 	pBigTom->SetPosition(216, 180);
-	
+
 	scene.Add(pBigTom);
 
-	std::shared_ptr<Grid> pGrid = std::make_shared<Grid>(20,20,40);
+	const std::string gridStructure
+	{
+		"####################"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+			 "#oooooooooooooooooo#"
+			 "###oooooooooooo#####"
+			 "ooo###oooooo###ooooo"
+			 "oooooo######oooooooo"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+			 "oooooooooooooooooooo"
+
+	};
+	std::shared_ptr<Grid> pGrid = std::make_shared<Grid>(20, 20, 40, gridStructure);
 
 	auto pDigger = new GameObject();
 	auto diggerTexture = new RenderTextureComponent(pDigger, nullptr);
@@ -154,7 +178,7 @@ void load()
 	//inputManager.AddMapping(0, std::move(moveLeftCommand), Controller::ControllerButton::DPadLeft);
 
 	std::unique_ptr<KillCommand> damageBigTom = std::make_unique<KillCommand>(pBigTom);
-	inputManager.AddMapping(0, std::move(damageBigTom), Controller::ControllerButton::RightShoulder,dae::InputManager::inputCondition::Press );
+	inputManager.AddMapping(0, std::move(damageBigTom), Controller::ControllerButton::RightShoulder, dae::InputManager::inputCondition::Press);
 
 	std::unique_ptr<AddScoreCommand> addScoreBigTom = std::make_unique<AddScoreCommand>(pBigTom);
 	inputManager.AddMapping(0, std::move(addScoreBigTom), Controller::ControllerButton::ButtonX, dae::InputManager::inputCondition::Press);
@@ -163,17 +187,33 @@ void load()
 	// KEYBOARD
 	//--------------------------------------------
 #pragma region MOVE COMMANDS
-	std::unique_ptr<MoveCommand> kbmoveLeftCommand = std::make_unique<MoveCommand>(pDigger, HeldDirection::Left );
-	inputManager.AddKeyboardMapping(std::move(kbmoveLeftCommand), SDL_SCANCODE_A,dae::InputManager::inputCondition::Hold);
+	//--------------------------------------------
+	std::unique_ptr<StartMovingCommand> kbLeftStart = std::make_unique<StartMovingCommand>(pDigger, pGrid);
+	inputManager.AddKeyboardMapping(std::move(kbLeftStart), SDL_SCANCODE_A, InputManager::inputCondition::Press);
+
+	std::unique_ptr<MoveCommand> kbmoveLeftCommand = std::make_unique<MoveCommand>(pDigger, HeldDirection::Left);
+	inputManager.AddKeyboardMapping(std::move(kbmoveLeftCommand), SDL_SCANCODE_A, dae::InputManager::inputCondition::Hold);
+	//--------------------------------------------
+
+	std::unique_ptr<StartMovingCommand> kbUpStart = std::make_unique<StartMovingCommand>(pDigger, pGrid);
+	inputManager.AddKeyboardMapping(std::move(kbUpStart), SDL_SCANCODE_W, InputManager::inputCondition::Press);
 
 	std::unique_ptr<MoveCommand> kbmoveUpCommand = std::make_unique<MoveCommand>(pDigger, HeldDirection::Up);
 	inputManager.AddKeyboardMapping(std::move(kbmoveUpCommand), SDL_SCANCODE_W, dae::InputManager::inputCondition::Hold);
 
+	//--------------------------------------------
+	std::unique_ptr<StartMovingCommand> kbDownCommand = std::make_unique<StartMovingCommand>(pDigger, pGrid);
+	inputManager.AddKeyboardMapping(std::move(kbDownCommand), SDL_SCANCODE_S, InputManager::inputCondition::Press);
+
 	std::unique_ptr<MoveCommand> kbmoveDownCommand = std::make_unique<MoveCommand>(pDigger, HeldDirection::Down);
 	inputManager.AddKeyboardMapping(std::move(kbmoveDownCommand), SDL_SCANCODE_S, dae::InputManager::inputCondition::Hold);
+	//--------------------------------------------
+	std::unique_ptr<StartMovingCommand> kbRightCommand = std::make_unique<StartMovingCommand>(pDigger, pGrid);
+	inputManager.AddKeyboardMapping(std::move(kbRightCommand), SDL_SCANCODE_D, InputManager::inputCondition::Press);
 
 	std::unique_ptr<MoveCommand> kbmoveRightCommand = std::make_unique<MoveCommand>(pDigger, HeldDirection::Right);
 	inputManager.AddKeyboardMapping(std::move(kbmoveRightCommand), SDL_SCANCODE_D, dae::InputManager::inputCondition::Hold);
+	//--------------------------------------------
 #pragma endregion MOVE COMMANDS
 
 	std::unique_ptr<KillCommand> kbDamageTinyTom = std::make_unique<KillCommand>(pDigger);

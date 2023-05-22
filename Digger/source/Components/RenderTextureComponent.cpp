@@ -1,12 +1,11 @@
 #include "RenderTextureComponent.h"
-#include "Texture2D.h"
 #include "GameObject.h"
 
 namespace dae
 {
 	RenderTextureComponent::RenderTextureComponent(Component::GameObjectPtr owner, TextureObjectPtr texture) : Component(owner)
 	{
-		m_Texture = texture;
+		m_Texture = std::move(texture);
 	}
 
 	void RenderTextureComponent::Update()

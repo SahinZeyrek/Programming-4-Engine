@@ -72,13 +72,16 @@
     <ClInclude Include="include\Achievement\WinGameAch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Grid.h">
+    <ClInclude Include="include\Grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GridRenderer.h">
+    <ClInclude Include="include\Components\GridRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Components\SoundComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Commands\StartMovingCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -92,7 +95,7 @@
     <ClCompile Include="source\Commands\MoveCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Commands\RotatorComponent.cpp">
+    <ClCompile Include="source\Components\RotatorComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\Commands\StopMovingCommand.cpp">
@@ -125,13 +128,16 @@
     <ClCompile Include="source\Achievement\WinGameAch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Grid.cpp">
+    <ClCompile Include="source\Grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GridRenderer.cpp">
+    <ClCompile Include="source\Components\GridRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\Components\SoundComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Commands\StartMovingCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

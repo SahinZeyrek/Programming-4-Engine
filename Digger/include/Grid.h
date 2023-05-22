@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <glm/glm.hpp>
+#include <string>
 namespace dae
 {
     class Grid final
@@ -15,10 +16,11 @@ namespace dae
     public:
 
         Grid(int rows, int cols, int cellsize);
+        Grid(int rows, int cols, int cellsize, const std::string& gridStructure);
         void Init();
-        glm::vec2 GetCellCenter(float xPos, float yPos);
+        glm::vec2 GetCellCenter(const float xPos, const float yPos);
         bool IsNearCellCenter(float radius,float xPos,float yPos);
-
+        int GetCellSize() const { return m_CellSize; };
         const std::vector<Cell>& GetCells() const { return m_Cells; };
         //------------------------------------------------
         // RULE OF FIVE 
