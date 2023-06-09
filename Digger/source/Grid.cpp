@@ -56,21 +56,48 @@ namespace dae
 	}
 	glm::vec2 Grid::GetCellCenter(const float xPos, const float yPos)
 	{
-		float cellX{ std::ceil(xPos / m_CellSize) };
-		float cellY{ std::ceil(yPos / m_CellSize) };
+		float cellX{ std::floor(xPos / m_CellSize) };
+		float cellY{ std::floor(yPos / m_CellSize) };
 		float cellHalf{ m_CellSize / 2.f };
 		glm::vec2 CellCenter{ cellX * m_CellSize + cellHalf,cellY * m_CellSize + cellHalf };
 		return CellCenter;
 	}
+	glm::vec2 Grid::GetCellTopLeft(const float xPos, const float yPos)
+	{
+		float cellX{ std::floor(xPos / m_CellSize) };
+		float cellY{ std::floor(yPos / m_CellSize) };
+		glm::vec2 CellCenter{ cellX * m_CellSize,cellY * m_CellSize };
+		return CellCenter;
+	}
+
 	bool Grid::IsNearCellCenter(float radius, float xPos, float yPos)
 	{
+		std::cout << "X: is " << xPos << '\n';
+		std::cout << "Y is: " << yPos << '\n';
 		glm::vec2 currentCellCenter = GetCellCenter(xPos, yPos);
-		glm::vec2 differntial{ currentCellCenter.x - xPos,currentCellCenter.y - yPos };
-		float distance = glm::dot(differntial, differntial);
+		std::cout << "CellCenterX is " << currentCellCenter.x << '\n';
+		std::cout << "CellCenterY is " << currentCellCenter.y << '\n';
+		glm::vec2 differential{ currentCellCenter.x - xPos,currentCellCenter.y - yPos };
+		float distance = glm::dot(differential, differential);
 		if (distance * distance < radius * radius)
 		{
 			return true;
 		}return false;
 	}
+	bool Grid::IsNearCellTopLeft(const float radius,const float xPos, const float yPos)
+	{
+		std::cout << "X: is " << xPos << '\n';
+		std::cout << "Y is: " << yPos << '\n';
+		glm::vec2 currentCellCenter = GetCellTopLeft(xPos, yPos);
+		std::cout << "CellCenterX is " << currentCellCenter.x << '\n';
+		std::cout << "CellCenterY is " << currentCellCenter.y << '\n';
+		glm::vec2 differential{ currentCellCenter.x - xPos,currentCellCenter.y - yPos };
+		float distance = glm::dot(differential, differential);
+		if (distance * distance < radius * radius)
+		{
+			return true;
+		}return false;
+	}
+
 }
 

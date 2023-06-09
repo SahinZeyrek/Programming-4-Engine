@@ -16,30 +16,31 @@ bool dae::InputManager::ProcessInput()
 		std::unique_ptr<Controller>& controller = m_Controllers[key.first.first];
 		switch (key.second)
 		{
-		case inputCondition::Hold:
-		{
-			if (controller->IsPressed(key.first.second))
-			{
-				command->Execute();
-			}
-		}
-		break;
 		case inputCondition::Press:
 		{
 			if (controller->IsDown(key.first.second))
 			{
 				command->Execute();
 			}
+			break;
 		}
-		break;
-		case inputCondition::Release:
+		case inputCondition::Hold:
 		{
-			if (controller->IsDown(key.first.second))
+			if (controller->IsPressed(key.first.second))
 			{
 				command->Execute();
 			}
+			break;
 		}
-		break;
+
+		case inputCondition::Release:
+		{
+			if (controller->IsUp(key.first.second))
+			{
+				command->Execute();
+			}
+			break;
+		}
 		default:
 			break;
 		}
@@ -53,30 +54,31 @@ bool dae::InputManager::ProcessInput()
 	{
 		switch (key.second)
 		{
-		case inputCondition::Hold:
-		{
-			if (m_Keyboard->IsPressed(key.first))
-			{
-				command->Execute();
-			}
-		}
-		break;
+
 		case inputCondition::Press:
 		{
 			if (m_Keyboard->IsDown(key.first))
 			{
 				command->Execute();
 			}
+			break;
 		}
-		break;
+		case inputCondition::Hold:
+		{
+			if (m_Keyboard->IsPressed(key.first))
+			{
+				command->Execute();
+			}
+			break;
+		}
 		case inputCondition::Release:
 		{
 			if (m_Keyboard->IsUp(key.first))
 			{
 				command->Execute();
 			}
+			break;
 		}
-		break;
 		default:
 		break;
 		}

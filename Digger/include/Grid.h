@@ -19,7 +19,9 @@ namespace dae
         Grid(int rows, int cols, int cellsize, const std::string& gridStructure);
         void Init();
         glm::vec2 GetCellCenter(const float xPos, const float yPos);
-        bool IsNearCellCenter(float radius,float xPos,float yPos);
+        glm::vec2 GetCellTopLeft(const float xPos, const float yPos);
+        bool IsNearCellCenter(const float radius,const float xPos,const float yPos);
+        bool IsNearCellTopLeft(const float radius,const float xPos, const float yPos);
         int GetCellSize() const { return m_CellSize; };
         const std::vector<Cell>& GetCells() const { return m_Cells; };
         //------------------------------------------------
