@@ -61,8 +61,9 @@ namespace dae
 		};
 		void RemoveComponent(Component* component);
 
-		Transform GetTransform() const{ return m_Transform;};
-		glm::vec3 GetLocalPosition() const { return m_Transform.GetPosition(); };
+		Transform GetTransform() const{ return m_Transform;}
+		glm::vec3 GetLocalPosition() const { return m_Transform.GetPosition(); }
+		Scene* GetParentScene() const { return m_ParentScene; }
 		void SetParent(GameObjectPtr go, bool keepWorldPos);
 		void Update();
 		void Render() const;

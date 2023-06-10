@@ -8,3 +8,5 @@
 #include "SpeedComponent.h"
 #include "UIComponent.h"
 #include "GridRenderer.h"
+#include "ColliderComponent.h"
+#include "ItemComponent.h"

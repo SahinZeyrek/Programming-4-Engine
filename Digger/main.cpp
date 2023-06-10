@@ -87,6 +87,9 @@ void load()
 		auto item = new GameObject();
 		item->AddComponent(new RenderTextureComponent(item, nullptr));
 		item->GetComponent<RenderTextureComponent>()->SetTexture("emerald.png");
+		item->AddComponent(new ColliderComponent(item, nullptr, 40.f, 40.f));
+		item->AddComponent(new ItemComponent(item));
+		item->AddComponent(new SoundComponent(item, "../Data/EmeraldPickUp.wav", 1.f));
 		scene.Add(item);
 		pGrid->AddGameObj(item);
 	}
@@ -95,8 +98,6 @@ void load()
 #pragma endregion Misc
 
 #pragma region Players
-	
-
 
 	auto pBigTom = new GameObject();
 	auto rtu_FunnyMan = new RenderTextureComponent(pBigTom, nullptr);
@@ -123,7 +124,7 @@ void load()
 	scene.Add(pDigger);
 
 #pragma endregion Players
-
+	
 	auto player1LivesUI = new GameObject();
 	player1LivesUI->SetPosition(10, 5);
 
@@ -146,7 +147,11 @@ void load()
 	player1ScoreUI->AddComponent(scoreUIComp);
 
 	scene.Add(player1ScoreUI);
-
+	for (size_t i{ 0 }; i < amountOfItems; ++i)
+	{
+		pGrid->GetItems()[i]->GetComponent<ColliderComponent>()->SetTarget(pDigger);
+		pGrid->GetItems()[i]->GetComponent<ItemComponent>()->AddObserver(scoreUIComp);
+	}
 
 
 

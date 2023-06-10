@@ -168,6 +168,11 @@ namespace dae
 		return index;
 	}
 
+	std::vector<GameObject*> Grid::GetItems()
+	{
+		return m_GameObjects;
+	}
+
 	void Grid::AddGameObj(GameObject* go)
 	{
 		m_GameObjects.push_back(go);

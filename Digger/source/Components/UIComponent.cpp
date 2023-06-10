@@ -13,13 +13,19 @@ namespace dae
 	{
 		switch (e)
 		{
-		case dae::Observer::Event::PlayerDied:
+		case Event::PlayerDied:
 			m_HealthComp->ReduceLives();
 			m_TextRender->SetText("Lives: " + std::to_string(m_HealthComp->GetLives()));
 			break;
-		case dae::Observer::Event::ScoreChanged:
+		case Event::ScoreChanged:
 			m_TextRender->SetText("Score: " + std::to_string(m_ScoreComp->GetScore()));
 			break;
+		case Event::ItemPickedUp:
+
+			m_ScoreComp->AddScore(25);
+			m_ScoreComp->IncrementCounter();
+			break;
+
 		default:
 			break;
 		}

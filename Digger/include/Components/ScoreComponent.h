@@ -10,6 +10,7 @@ namespace dae
 		void AddScore(int amount);
 		int GetScore() const { return m_Score; }
 		void BindOnScoreChanged(Observer* observer);
+		void IncrementCounter();
 		virtual void Update() override;
 		virtual void Render() override;
 		//------------------------------------------------
@@ -21,6 +22,8 @@ namespace dae
 		ScoreComponent& operator=(const ScoreComponent&) = delete;
 		ScoreComponent& operator=(const ScoreComponent&&) = delete;
 	private:
+		size_t m_ItemPickUpCounter{};
+		const size_t m_CounterThreshold{8};
 		int m_Score{};
 		Subject m_Subject{};
 	};

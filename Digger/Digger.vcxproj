@@ -189,8 +189,10 @@
     <ClInclude Include="include\Components\SoundComponent.h" />
     <ClInclude Include="include\Commands\StartMovingCommand.h" />
     <ClInclude Include="include\Components\MovementDirectionComponent.h" />
+    <ClInclude Include="include\Components\ItemComponent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Components\ItemComponent.cpp" />
     <ClCompile Include="source\Components\ColliderComponent.cpp" />
     <ClCompile Include="source\Components\MovementDirectionComponent.cpp" />
     <ClCompile Include="source\Grid.cpp" />
