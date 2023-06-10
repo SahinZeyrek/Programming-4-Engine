@@ -1,5 +1,7 @@
 #include "Grid.h"
 #include <iostream>
+#include <random>
+
 namespace dae
 {
 	Grid::Grid(int rows, int cols, int cellsize)
@@ -33,8 +35,7 @@ namespace dae
 				m_Cells.push_back(currentPoint);
 			}
 		}
-
-		for (int i{ 0 }; i < m_Cells.size(); ++i)
+		for (size_t i{ 0 }; i < m_Cells.size(); ++i)
 		{
 			switch (gridStructure[i])
 			{
@@ -144,7 +145,7 @@ namespace dae
 		}return false;
 	}
 
-	Grid::Cell* Grid::GetCellFromIndex(const int index)
+	Grid::Cell* Grid::GetCellFromIndex(const size_t index)
 	{
 		if (index >= m_Cells.size())
 		{
@@ -165,6 +166,31 @@ namespace dae
 		const float cellY{ std::floor(y / m_CellSize) };
 		const int index =  static_cast<int>( cellX + (cellY -1) * static_cast<float>(m_Cols));
 		return index;
+	}
+
+	void Grid::AddGameObj(GameObject* go)
+	{
+		m_GameObjects.push_back(go);
+	}
+
+	void Grid::DistributeItems()
+	{
+		std::random_device rd;
+		std::mt19937 generator(rd());
+		std::uniform_int_distribution<int> distribution(0, static_cast<int>(m_Cells.size() -1));
+		std::vector<int> randomNumbers;
+		for (auto obj : m_GameObjects)
+		{
+			int num;
+			do
+			{
+				num = distribution(generator);
+			} while (std::ranges::find(randomNumbers, num) != randomNumbers.end());
+			randomNumbers.push_back(num);
+			const auto cell = GetCellFromIndex(num);
+			float offset{ 2.5f };
+			obj->SetPosition(cell->location.x + offset, cell->location.y + offset );
+		}
 	}
 }
 

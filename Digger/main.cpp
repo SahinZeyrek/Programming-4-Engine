@@ -37,7 +37,7 @@ void load()
 #else
 	ServiceLocator::RegisterSoundSystem(std::make_unique<DefaultSoundSystem>());
 #endif
-
+#pragma region Misc
 	ServiceLocator::GetSoundSystem().SetVolume(1.f);
 	std::cout << "-------------------------------------------------------------------------------\n";
 	std::cout << "PRESS Q TO PLAY A SOUND (might be loud, careful even though volume is set to 1)\n";
@@ -49,17 +49,7 @@ void load()
 	pBackground->GetComponent<RenderTextureComponent>()->SetTexture("Level1 Background.png");
 	pBackground->SetPosition(0, 40);
 	scene.Add(pBackground);
-#pragma region Players
-	auto pBigTom = new GameObject();
-	auto rtu_FunnyMan = new RenderTextureComponent(pBigTom, nullptr);
-	pBigTom->AddComponent(rtu_FunnyMan);
-	pBigTom->AddComponent(new HealthComponent(pBigTom, 3, 25));
-	pBigTom->AddComponent(new ScoreComponent(pBigTom, 0));
-	pBigTom->AddComponent(new SpeedComponent(pBigTom, 100.f));
-	pBigTom->GetComponent<RenderTextureComponent>()->SetTexture("funny-man.tga");
-	pBigTom->SetPosition(216, 180);
 
-	scene.Add(pBigTom);
 
 	const std::string gridStructure
 	{
@@ -85,13 +75,44 @@ void load()
 			 "oooooooooooooooooooo"
 
 	};
-	std::shared_ptr<Grid> pGrid = std::make_shared<Grid>(20, 20, 40, gridStructure);
+	int rows{ 20 }, cols{ 20 }, cellSize{ 40 };
+	std::shared_ptr<Grid> pGrid = std::make_shared<Grid>(rows, cols, cellSize, gridStructure);
+	auto pGridObj = new GameObject();
+	pGridObj->AddComponent(new GridRenderer(pGridObj, pGrid));
+	scene.Add(pGridObj);
+
+	size_t amountOfItems{ 20 };
+	for (size_t i{0}; i < amountOfItems; ++i)
+	{
+		auto item = new GameObject();
+		item->AddComponent(new RenderTextureComponent(item, nullptr));
+		item->GetComponent<RenderTextureComponent>()->SetTexture("emerald.png");
+		scene.Add(item);
+		pGrid->AddGameObj(item);
+	}
+	pGrid->DistributeItems();
+
+#pragma endregion Misc
+
+#pragma region Players
+	
+
+
+	auto pBigTom = new GameObject();
+	auto rtu_FunnyMan = new RenderTextureComponent(pBigTom, nullptr);
+	pBigTom->AddComponent(rtu_FunnyMan);
+	pBigTom->AddComponent(new HealthComponent(pBigTom, 3, 25));
+	pBigTom->AddComponent(new ScoreComponent(pBigTom, 0));
+	pBigTom->AddComponent(new SpeedComponent(pBigTom, 100.f));
+	pBigTom->GetComponent<RenderTextureComponent>()->SetTexture("funny-man.tga");
+	pBigTom->SetPosition(216, 180);
+
+	scene.Add(pBigTom);
 
 	auto pDigger = new GameObject();
 	auto diggerTexture = new RenderTextureComponent(pDigger, nullptr);
 	auto tinyTomHealth = new HealthComponent(pDigger, 3, 20);
 	pDigger->AddComponent(new MovementDirectionComponent(pDigger));
-	pDigger->AddComponent(new GridRenderer(pDigger, pGrid));
 	pDigger->AddComponent(tinyTomHealth);
 	pDigger->AddComponent(diggerTexture);
 	pDigger->AddComponent(new ScoreComponent(pDigger, 0));

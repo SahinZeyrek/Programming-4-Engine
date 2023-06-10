@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <string>
 #include "MovementDirectionComponent.h"
+#include "GameObject.h"
 namespace dae
 {
     class Grid final
@@ -23,9 +24,11 @@ namespace dae
         glm::vec2 GetCellTopLeft(const float xPos, const float yPos, MovementDirectionComponent::MovementDirection moveDir );
         bool IsNearCellCenter(const float radius,const float xPos,const float yPos);
         bool IsNearCellTopLeft(const float radius,const float xPos, const float yPos);
-        Cell* GetCellFromIndex(const int index);
+        Cell* GetCellFromIndex(const size_t index);
         int GetIndexFromPos(const float x, const float y);
         int GetCellSize() const { return m_CellSize; };
+        void AddGameObj(GameObject* go);
+        void DistributeItems();
         const std::vector<Cell>& GetCells() const { return m_Cells; };
         //------------------------------------------------
         // RULE OF FIVE 
@@ -38,6 +41,7 @@ namespace dae
     private:
         int m_Rows{}, m_Cols{}, m_CellSize{}, m_ScreenOffset{ 40 };
         std::vector<Cell> m_Cells{};
+        std::vector<GameObject*>m_GameObjects;
     };
 
 }

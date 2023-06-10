@@ -17,6 +17,7 @@ Scene::~Scene() {
 
 void Scene::Add(GameObject* object)
 {
+	object->SetParentScene(this);
 	m_pObjects.push_back(object);
 }
 

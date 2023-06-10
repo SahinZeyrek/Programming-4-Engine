@@ -5,6 +5,7 @@
 #include <vector>
 #include "Observer.h"
 #include <exception>
+#include "Scene.h"
 namespace dae
 {
 	class Texture2D;
@@ -66,6 +67,7 @@ namespace dae
 		void Update();
 		void Render() const;
 		void SetPosition(float x, float y);
+		void SetParentScene(Scene* scene);
 		const glm::vec3& GetWorldPosition();
 		void UpdateWorldPos();
 		virtual void OnEvent(Event event) override;
@@ -86,6 +88,7 @@ namespace dae
 		std::vector<Component*> m_pMarkedForRemoval{};
 		GameObject* m_Parent{};
 		bool m_isDirty{ false };
+		Scene* m_ParentScene;
 
 	};
 }
