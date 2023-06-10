@@ -2,7 +2,9 @@
 
 namespace dae
 {
-	MovementDirectionComponent::MovementDirectionComponent(GameObjectPtr owner) : Component(owner), m_MovDir(MovementDirection::None)
+	MovementDirectionComponent::MovementDirectionComponent(GameObjectPtr owner) : Component(owner),
+															m_MovDir(MovementDirection::None),
+														    m_LastMoveDir(MovementDirection::None)
 	{
 
 	}

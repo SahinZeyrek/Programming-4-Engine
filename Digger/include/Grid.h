@@ -2,6 +2,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include <string>
+#include "MovementDirectionComponent.h"
 namespace dae
 {
     class Grid final
@@ -19,9 +20,11 @@ namespace dae
         Grid(int rows, int cols, int cellsize, const std::string& gridStructure);
         void Init();
         glm::vec2 GetCellCenter(const float xPos, const float yPos);
-        glm::vec2 GetCellTopLeft(const float xPos, const float yPos);
+        glm::vec2 GetCellTopLeft(const float xPos, const float yPos, MovementDirectionComponent::MovementDirection moveDir );
         bool IsNearCellCenter(const float radius,const float xPos,const float yPos);
         bool IsNearCellTopLeft(const float radius,const float xPos, const float yPos);
+        Cell* GetCellFromIndex(const int index);
+        int GetIndexFromPos(const float x, const float y);
         int GetCellSize() const { return m_CellSize; };
         const std::vector<Cell>& GetCells() const { return m_Cells; };
         //------------------------------------------------

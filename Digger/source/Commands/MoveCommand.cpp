@@ -24,9 +24,15 @@ void dae::MoveCommand::Execute()
 	default:
 		break;
 	}
-	glm::normalize(m_Direction);
-		pos -= m_ObjectPtr->GetComponent<SpeedComponent>()->GetSpeed() * m_Direction * TimeUtil::deltaTime;
-		m_ObjectPtr->SetPosition(pos.x, pos.y);
+
+	const int index = m_Grid->GetIndexFromPos(pos.x, pos.y);
+	auto cell = m_Grid->GetCellFromIndex(index);
+	if (cell != nullptr)
+	{
+		cell->isActive = false;
+	}
+	pos -= m_ObjectPtr->GetComponent<SpeedComponent>()->GetSpeed() * m_Direction * TimeUtil::deltaTime;
+	m_ObjectPtr->SetPosition(pos.x, pos.y);
 	
 	/*if (!m_IsMoving)
 	{

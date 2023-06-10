@@ -146,10 +146,10 @@ void load()
 	player2ScoreUI->AddComponent(new UIComponent(player2ScoreUI, pBigTom->GetComponent<ScoreComponent>()));
 
 	scene.Add(player2ScoreUI);
-	std::unique_ptr<WinGameAch> winGameAch = std::make_unique<WinGameAch>();
-	auto ach = AchievementManager::GetInstance().AddAchievement(std::move(winGameAch));
-	pDigger->GetComponent<ScoreComponent>()->BindOnScoreChanged(ach);
-	pBigTom->GetComponent<ScoreComponent>()->BindOnScoreChanged(ach);
+	//std::unique_ptr<WinGameAch> winGameAch = std::make_unique<WinGameAch>();
+	//auto ach = AchievementManager::GetInstance().AddAchievement(std::move(winGameAch));
+	//pDigger->GetComponent<ScoreComponent>()->BindOnScoreChanged(ach);
+	//pBigTom->GetComponent<ScoreComponent>()->BindOnScoreChanged(ach);
 
 
 	//pGameObj = new GameObject();
@@ -193,7 +193,7 @@ void load()
 	inputManager.AddKeyboardMapping(std::move(kbLeftStart), SDL_SCANCODE_A, InputManager::inputCondition::Press);
 
 
-	std::unique_ptr<MoveCommand> kbMoveLeftCommand = std::make_unique<MoveCommand>(pDigger, MovementDirectionComponent::MovementDirection::West);
+	std::unique_ptr<MoveCommand> kbMoveLeftCommand = std::make_unique<MoveCommand>(pDigger, pGrid, MovementDirectionComponent::MovementDirection::West);
 	inputManager.AddKeyboardMapping(std::move(kbMoveLeftCommand), SDL_SCANCODE_A, dae::InputManager::inputCondition::Hold);
 
 	std::unique_ptr<StopMovingCommand> kbLeftEnd = std::make_unique<StopMovingCommand>(pDigger);
@@ -204,7 +204,7 @@ void load()
 	std::unique_ptr<StartMovingCommand> kbUpStart = std::make_unique<StartMovingCommand>(pDigger, pGrid, MovementDirectionComponent::MovementDirection::North);
 	inputManager.AddKeyboardMapping(std::move(kbUpStart), SDL_SCANCODE_W, InputManager::inputCondition::Press);
 
-	std::unique_ptr<MoveCommand> kbMoveUpCommand = std::make_unique<MoveCommand>(pDigger, MovementDirectionComponent::MovementDirection::North);
+	std::unique_ptr<MoveCommand> kbMoveUpCommand = std::make_unique<MoveCommand>(pDigger, pGrid, MovementDirectionComponent::MovementDirection::North);
 	inputManager.AddKeyboardMapping(std::move(kbMoveUpCommand), SDL_SCANCODE_W, dae::InputManager::inputCondition::Hold);
 
 	std::unique_ptr<StopMovingCommand> kbUpEnd = std::make_unique<StopMovingCommand>(pDigger);
@@ -215,7 +215,7 @@ void load()
 	std::unique_ptr<StartMovingCommand> kbDownStart = std::make_unique<StartMovingCommand>(pDigger, pGrid,MovementDirectionComponent::MovementDirection::South);
 	inputManager.AddKeyboardMapping(std::move(kbDownStart), SDL_SCANCODE_S, InputManager::inputCondition::Press);
 
-	std::unique_ptr<MoveCommand> kbMoveDownCommand = std::make_unique<MoveCommand>(pDigger, MovementDirectionComponent::MovementDirection::South);
+	std::unique_ptr<MoveCommand> kbMoveDownCommand = std::make_unique<MoveCommand>(pDigger, pGrid, MovementDirectionComponent::MovementDirection::South);
 	inputManager.AddKeyboardMapping(std::move(kbMoveDownCommand), SDL_SCANCODE_S, dae::InputManager::inputCondition::Hold);
 
 	std::unique_ptr<StopMovingCommand> kbDownEnd = std::make_unique<StopMovingCommand>(pDigger);
@@ -226,7 +226,7 @@ void load()
 	std::unique_ptr<StartMovingCommand> kbRightStart = std::make_unique<StartMovingCommand>(pDigger, pGrid,MovementDirectionComponent::MovementDirection::East);
 	inputManager.AddKeyboardMapping(std::move(kbRightStart), SDL_SCANCODE_D, InputManager::inputCondition::Press);
 
-	std::unique_ptr<MoveCommand> kbmoveRightCommand = std::make_unique<MoveCommand>(pDigger, MovementDirectionComponent::MovementDirection::East);
+	std::unique_ptr<MoveCommand> kbmoveRightCommand = std::make_unique<MoveCommand>(pDigger, pGrid, MovementDirectionComponent::MovementDirection::East);
 	inputManager.AddKeyboardMapping(std::move(kbmoveRightCommand), SDL_SCANCODE_D, dae::InputManager::inputCondition::Hold);
 
 	std::unique_ptr<StopMovingCommand> kbRightEnd = std::make_unique<StopMovingCommand>(pDigger);

@@ -62,8 +62,53 @@ namespace dae
 		glm::vec2 CellCenter{ cellX * m_CellSize + cellHalf,cellY * m_CellSize + cellHalf };
 		return CellCenter;
 	}
-	glm::vec2 Grid::GetCellTopLeft(const float xPos, const float yPos)
+	glm::vec2 Grid::GetCellTopLeft(const float xPos, const float yPos,MovementDirectionComponent::MovementDirection moveDir)
 	{
+		switch (moveDir)
+		{
+		case MovementDirectionComponent::MovementDirection::North:
+			{
+			float cellX{ std::floor(xPos / m_CellSize) };
+			float cellY{ std::floor(yPos / m_CellSize) };
+			glm::vec2 CellCenter{ cellX * m_CellSize,cellY * m_CellSize };
+			return CellCenter;
+			}
+			break;
+		case MovementDirectionComponent::MovementDirection::East:
+			{
+			float cellX{ std::ceil(xPos / m_CellSize) };
+			float cellY{ std::floor(yPos / m_CellSize) };
+			glm::vec2 CellCenter{ cellX * m_CellSize,cellY * m_CellSize };
+			return CellCenter;
+			}
+			break;
+
+		case MovementDirectionComponent::MovementDirection::South:
+			{
+			float cellX{ std::floor(xPos / m_CellSize) };
+			float cellY{ std::ceil(yPos / m_CellSize) };
+			glm::vec2 CellCenter{ cellX * m_CellSize,cellY * m_CellSize };
+			return CellCenter;
+			}
+			break;
+		case MovementDirectionComponent::MovementDirection::West:
+			{
+			float cellX{ std::floor(xPos / m_CellSize) };
+			float cellY{ std::floor(yPos / m_CellSize) };
+			glm::vec2 CellCenter{ cellX * m_CellSize,cellY * m_CellSize };
+			return CellCenter;
+			}
+			break;
+		case MovementDirectionComponent::MovementDirection::None: 
+		{
+			float cellX{ std::floor(xPos / m_CellSize) };
+			float cellY{ std::floor(yPos / m_CellSize) };
+			glm::vec2 CellCenter{ cellX * m_CellSize,cellY * m_CellSize };
+			return CellCenter;
+		}
+			break;
+		default: ;
+		}
 		float cellX{ std::floor(xPos / m_CellSize) };
 		float cellY{ std::floor(yPos / m_CellSize) };
 		glm::vec2 CellCenter{ cellX * m_CellSize,cellY * m_CellSize };
@@ -88,7 +133,7 @@ namespace dae
 	{
 		std::cout << "X: is " << xPos << '\n';
 		std::cout << "Y is: " << yPos << '\n';
-		glm::vec2 currentCellCenter = GetCellTopLeft(xPos, yPos);
+		glm::vec2 currentCellCenter = GetCellTopLeft(xPos, yPos, MovementDirectionComponent::MovementDirection::None);
 		std::cout << "CellCenterX is " << currentCellCenter.x << '\n';
 		std::cout << "CellCenterY is " << currentCellCenter.y << '\n';
 		glm::vec2 differential{ currentCellCenter.x - xPos,currentCellCenter.y - yPos };
@@ -99,5 +144,27 @@ namespace dae
 		}return false;
 	}
 
+	Grid::Cell* Grid::GetCellFromIndex(const int index)
+	{
+		if (index >= m_Cells.size())
+		{
+			return nullptr;
+		}
+		if (&m_Cells[index] != nullptr)
+		{
+			std::cout << "Index is : " << m_Cells[index].index << ", Pos is: " << m_Cells[index].location.x << ", " << m_Cells[index].location.x << '\n';
+			return &m_Cells[index];
+		}
+		return nullptr;
+		
+	}
+
+	int Grid::GetIndexFromPos(const float x, const float y)
+	{
+		const float cellX{ std::floor(x / m_CellSize) };
+		const float cellY{ std::floor(y / m_CellSize) };
+		const int index =  static_cast<int>( cellX + (cellY -1) * static_cast<float>(m_Cols));
+		return index;
+	}
 }
 
