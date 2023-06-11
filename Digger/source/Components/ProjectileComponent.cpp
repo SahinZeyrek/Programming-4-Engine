@@ -85,7 +85,7 @@ namespace dae
 		{
 			m_Bullet->SetPosition(GetOwner()->GetLocalPosition().x, GetOwner()->GetLocalPosition().y);
 			m_MoveDir->SetMovementDirection(
-				GetOwner()->GetComponent<MovementDirectionComponent>()->GetLastMovementDirection());
+			GetOwner()->GetComponent<MovementDirectionComponent>()->GetLastMovementDirection());
 			m_CanFire = false;
 		}
 		

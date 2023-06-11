@@ -1,6 +1,7 @@
 #include "PlayerComponent.h"
 #include "HealthComponent.h"
 #include "GameObject.h"
+#include "ScoreComponent.h"
 
 namespace dae
 {
@@ -24,6 +25,11 @@ namespace dae
 		switch (e)
 		{
 		case Observer::Event::PlayerDied:
+			if (auto scoreComp = GetOwner()->GetComponent<ScoreComponent>())
+			{
+				scoreComp->ResetCounter();
+			}
+			
 			if (GetOwner()->GetComponent<HealthComponent>()->GetIsDead())
 			{
 				GetOwner()->SetPosition(-500, -500);

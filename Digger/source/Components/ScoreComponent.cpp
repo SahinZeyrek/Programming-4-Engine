@@ -32,6 +32,11 @@ namespace dae
 		}
 	}
 
+	void ScoreComponent::ResetCounter()
+	{
+		m_ItemPickUpCounter = 0;
+	}
+
 	void ScoreComponent::Update()
 	{
 	}

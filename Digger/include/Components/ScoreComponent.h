@@ -11,6 +11,7 @@ namespace dae
 		int GetScore() const { return m_Score; }
 		void BindOnScoreChanged(Observer* observer);
 		void IncrementCounter();
+		void ResetCounter();
 		virtual void Update() override;
 		virtual void Render() override;
 		//------------------------------------------------

@@ -52,25 +52,25 @@ void load()
 
 	const std::string gridStructure
 	{
-			 "oooooooooooooooooooo"
-			 "oooooooooooooooooooo"
-			 "oooooooooooooooooooo"
-			 "oooo#ooooooooooooooo"
-			 "oooooooooooooooooooo"
-			 "oooooooooooooooooooo"
-			 "#oooooooooooooooooo#"
-			 "###oooooooooooo#####"
-			 "ooo###oooooo###ooooo"
-			 "oooooo######oooooooo"
-			 "oooooooooooooooooooo"
-			 "oooooooooooooooooooo"
-			 "oooooooooooooooooooo"
-			 "oooooooooooooooooooo"
-			 "oooooooooooooooooooo"
-			 "oooooooooooooooooooo"
-			 "oooooooooooooooooooo"
-			 "oooooooooooooooooooo"
-			 "oooooooooooooooooooo"
+			 "ooooooo####ooooooo##"
+			 "ooooooo####ooooooo##"
+			 "ooooooo####ooooooo##"
+			 "oooo#oo#############"
+			 "ooooooo####ooooooooo"
+			 "ooooooo####ooooooooo"
+			 "#oooooo####oooooooo#"
+			 "###oooo####oooo#####"
+			 "ooo############ooooo"
+			 "oooooo#####ooooooooo"
+			 "oooooo#####ooooooooo"
+			 "oooooo#####ooooooooo"
+			 "oooooo#####ooooooooo"
+			 "oooooo#####ooooooooo"
+			 "oooooo#####ooooooooo"
+			 "oooooo#####ooooooooo"
+			 "oooooo#####ooooooooo"
+			 "oooooo#####ooooooooo"
+			 "o##################o"
 			 "oooooooooooooooooooo"
 
 	};
@@ -103,6 +103,7 @@ void load()
 	pBigTom->AddComponent(rtu_FunnyMan);
 	pBigTom->AddComponent(new HealthComponent(pBigTom, 5, 3));
 	pBigTom->AddComponent(new ScoreComponent(pBigTom, 0));
+	pBigTom->AddComponent(new SoundComponent(pBigTom, "aughh.wav", 1.f));
 	pBigTom->AddComponent(new SpeedComponent(pBigTom, 100.f));
 	pBigTom->GetComponent<RenderTextureComponent>()->SetTexture("funny-man-rescaled.png");
 	pBigTom->AddComponent(new ColliderComponent(pBigTom, nullptr, 40.f, 40.f));
@@ -130,7 +131,7 @@ void load()
 	pDigger->AddComponent(new SpeedComponent(pDigger, 100.f));
 	pDigger->AddComponent(new SoundComponent(pDigger, "aughh.wav", 0.1f));
 	pDigger->AddComponent(new PlayerComponent(pDigger, { 200.f,120.f }));
-	pDigger->AddComponent(new ProjectileComponent(pDigger, pProjectile, 2.f));
+	pDigger->AddComponent(new ProjectileComponent(pDigger, pProjectile, 5.f));
 	pDigger->GetComponent<HealthComponent>()->AddObserver(pDigger->GetComponent<PlayerComponent>());
 	pDigger->GetComponent<RenderTextureComponent>()->SetTexture("Digger.png");
 	pDigger->GetComponent<ProjectileComponent>()->AddObserver(pBigTom->GetComponent<EnemyComponent>());

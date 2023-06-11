@@ -1,5 +1,5 @@
 #include "EnemyComponent.h"
-
+#include "SoundComponent.h"
 #include <iostream>
 
 namespace dae
@@ -37,6 +37,7 @@ namespace dae
 		{
 		case Event::EnemyHit:
 			GetOwner()->SetPosition(-100.f, -100.f);
+			GetOwner()->GetComponent<SoundComponent>()->PlaySound();
 			// TO DO: disable ai mover;
 			break;
 
