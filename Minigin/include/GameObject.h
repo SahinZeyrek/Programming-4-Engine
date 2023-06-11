@@ -65,6 +65,7 @@ namespace dae
 		glm::vec3 GetLocalPosition() const { return m_Transform.GetPosition(); }
 		Scene* GetParentScene() const { return m_ParentScene; }
 		void SetParent(GameObjectPtr go, bool keepWorldPos);
+		void SetIsActive(bool isActive) { m_IsActive = isActive; }
 		void Update();
 		void Render() const;
 		void SetPosition(float x, float y);
@@ -89,6 +90,7 @@ namespace dae
 		std::vector<Component*> m_pMarkedForRemoval{};
 		GameObject* m_Parent{};
 		bool m_isDirty{ false };
+		bool m_IsActive{ true };
 		Scene* m_ParentScene;
 
 	};

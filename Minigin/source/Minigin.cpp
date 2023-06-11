@@ -114,9 +114,9 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		}
 		sceneManager.Update();
 		renderer.Render();
-
 		const auto sleepTime = currentTime + milliseconds(TimeUtil::frameTimeMs) - high_resolution_clock::now();
 		std::this_thread::sleep_for(sleepTime);
 	}
 
 }
+

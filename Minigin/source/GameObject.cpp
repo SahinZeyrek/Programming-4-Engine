@@ -47,18 +47,26 @@ namespace dae
 			delete m_pMarkedForRemoval[i];
 			m_pComponents.erase(std::remove(m_pComponents.begin(), m_pComponents.end(), m_pMarkedForRemoval[i]));
 		}
-		for (auto comp : m_pComponents)
+		if (m_IsActive)
 		{
-			comp->Update();
+			for (auto comp : m_pComponents)
+			{
+				comp->Update();
+			}
 		}
+		
 	}
 
 	void GameObject::Render() const
 	{
-		for (auto comp : m_pComponents)
+		if (m_IsActive)
 		{
-			comp->Render();
+			for (auto comp : m_pComponents)
+			{
+				comp->Render();
+			}
 		}
+		
 	}
 
 

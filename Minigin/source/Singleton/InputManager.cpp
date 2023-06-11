@@ -8,86 +8,98 @@
 
 bool dae::InputManager::ProcessInput()
 {
-	for (auto& [key, command] : m_Commands)
+	if (!m_CommandsBuffer.empty())
 	{
-		// nested pair, key.first.first == index
-		// key.second == inputcondition
-		// key.first.second == button
-		std::unique_ptr<Controller>& controller = m_Controllers[key.first.first];
-		switch (key.second)
-		{
-		case inputCondition::Press:
-		{
-			if (controller->IsDown(key.first.second))
-			{
-				command->Execute();
-			}
-			break;
-		}
-		case inputCondition::Hold:
-		{
-			if (controller->IsPressed(key.first.second))
-			{
-				command->Execute();
-			}
-			break;
-		}
-
-		case inputCondition::Release:
-		{
-			if (controller->IsUp(key.first.second))
-			{
-				command->Execute();
-			}
-			break;
-		}
-		default:
-			break;
-		}
-
+		m_CommandsBuffer.clear();
 	}
-	for (auto& controller : m_Controllers)
+	if (!m_kbCommandsBuffer.empty())
 	{
-		controller->Update();
+		m_kbCommandsBuffer.clear();
 	}
-	for (auto& [key, command] : m_kbCommands)
-	{
-		switch (key.second)
+		if (!m_Commands.empty())
 		{
+			for (auto& [key, command] : m_Commands)
+			{
+				// nested pair, key.first.first == index
+				// key.second == inputcondition
+				// key.first.second == button
+				std::unique_ptr<Controller>& controller = m_Controllers[key.first.first];
+				switch (key.second)
+				{
+				case inputCondition::Press:
+				{
+					if (controller->IsDown(key.first.second))
+					{
+						command->Execute();
+					}
+					break;
+				}
+				case inputCondition::Hold:
+				{
+					if (controller->IsPressed(key.first.second))
+					{
+						command->Execute();
+					}
+					break;
+				}
 
-		case inputCondition::Press:
-		{
-			if (m_Keyboard->IsDown(key.first))
-			{
-				command->Execute();
+				case inputCondition::Release:
+				{
+					if (controller->IsUp(key.first.second))
+					{
+						command->Execute();
+					}
+					break;
+				}
+				default:
+					break;
+				}
 			}
-			break;
+
 		}
-		case inputCondition::Hold:
+		for (auto& controller : m_Controllers)
 		{
-			if (m_Keyboard->IsPressed(key.first))
-			{
-				command->Execute();
-			}
-			break;
+			controller->Update();
 		}
-		case inputCondition::Release:
+		if (!m_kbCommands.empty())
 		{
-			if (m_Keyboard->IsUp(key.first))
+			for (auto& [key, command] : m_kbCommands)
 			{
-				command->Execute();
+				switch (key.second)
+				{
+
+				case inputCondition::Press:
+				{
+					if (m_Keyboard->IsDown(key.first))
+					{
+						command->Execute();
+					}
+					break;
+				}
+				case inputCondition::Hold:
+				{
+					if (m_Keyboard->IsPressed(key.first))
+					{
+						command->Execute();
+					}
+					break;
+				}
+				case inputCondition::Release:
+				{
+					if (m_Keyboard->IsUp(key.first))
+					{
+						command->Execute();
+					}
+					break;
+				}
+				default:
+					break;
+				}
+
 			}
-			break;
 		}
-		default:
-		break;
-		}
-		
-	}
+	
 	m_Keyboard->Update();
-
-
-
 	// KB
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
@@ -99,6 +111,14 @@ bool dae::InputManager::ProcessInput()
 	}
 
 	return true;
+}
+
+void dae::InputManager::Clear()
+{
+	m_kbCommandsBuffer = std::move(m_kbCommands);
+	m_kbCommands = KeyboardCommandsMap();
+	m_CommandsBuffer = std::move(m_Commands);
+	m_CommandsBuffer = ControllerCommandsMap();
 }
 
 void dae::InputManager::AddMapping(unsigned int index, std::unique_ptr<Command> command, Controller::ControllerButton button, inputCondition condition)

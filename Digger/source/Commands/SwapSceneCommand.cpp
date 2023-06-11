@@ -1,0 +1,17 @@
+#include "SwapSceneCommand.h"
+#include "SceneManager.h"
+#include "InputManager.h"
+namespace dae
+{
+	void SwapSceneCommand::Execute()
+	{
+		InputManager::GetInstance().SetCanProcess(false);
+		auto& sm = SceneManager::GetInstance();
+		std::string capture = m_SceneName;
+		sm.LoadScene(capture);
+	}
+	SwapSceneCommand::SwapSceneCommand(const std::string& scene) : m_SceneName(scene)
+	{
+
+	}
+}

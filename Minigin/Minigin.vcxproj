@@ -237,6 +237,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\SDL2_ttf.dll" "$(Ou
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Font.h" />
     <ClInclude Include="include\sound\AudioClip.h" />
     <ClInclude Include="include\sound\DefaultSoundSystem.h" />
     <ClInclude Include="include\Achievement\Achievement.h" />
@@ -245,7 +246,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\$(PlatformTarget)\SDL2_ttf.dll" "$(Ou
     <ClInclude Include="include\Component.h" />
     <ClInclude Include="include\Controller.h" />
     <ClInclude Include="include\Delegate.h" />
-    <ClInclude Include="include\Font.h" />
     <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\Keyboard.h" />
     <ClInclude Include="include\Minigin.h" />

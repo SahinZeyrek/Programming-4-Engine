@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <functional>
-
+#include "Scene.h"
 namespace dae
 {
 	class Minigin
