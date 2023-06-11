@@ -11,7 +11,11 @@ namespace dae
 
 	MovementDirectionComponent::MovementDirection MovementDirectionComponent::GetMovementDirection() const
 	{
-		return m_MovDir;
+		if (GetOwner() != nullptr)
+		{
+			return m_MovDir;
+		}
+		return MovementDirection::None;
 	}
 
 	MovementDirectionComponent::MovementDirection MovementDirectionComponent::GetLastMovementDirection() const

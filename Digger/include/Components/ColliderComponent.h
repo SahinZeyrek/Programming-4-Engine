@@ -1,7 +1,6 @@
 #pragma once
 #include "Component.h"
 #include "GameObject.h"
-#include "Subject.h"
 namespace dae
 {
 	class ColliderComponent final : public Component
@@ -24,10 +23,12 @@ namespace dae
 		ColliderComponent& operator=(const ColliderComponent& other) = delete;
 		ColliderComponent& operator=(ColliderComponent&& other) = delete;
 	private:
-		Subject m_Subject;
 		GameObject* m_Target;
 		Rectangle m_Rectangle;
 		Rectangle m_TargetRectangle;
+		float m_Timer;
+		const float m_MaxTime;
+		bool m_IsActive;
 	};
 }
 

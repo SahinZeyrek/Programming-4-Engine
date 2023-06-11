@@ -9,9 +9,30 @@ namespace dae
 
 	void StopMovingCommand::Execute()
 	{
-		m_LastMoveDir = m_Target->GetComponent<MovementDirectionComponent>()->GetMovementDirection();
-		m_Target->GetComponent<MovementDirectionComponent>()->SetLastMoveDirection(m_LastMoveDir);
-		m_Target->GetComponent<MovementDirectionComponent>()->SetMovementDirection(MovementDirectionComponent::MovementDirection::None);
+		if (m_Target!= nullptr && m_IsActive)
+		{
+			if (m_Target->GetComponent<MovementDirectionComponent>()->GetOwner() == nullptr)
+			{
+				m_IsActive = false;
+			}
+			else
+			{
+				m_LastMoveDir = m_Target->GetComponent<MovementDirectionComponent>()->GetMovementDirection();
+				m_Target->GetComponent<MovementDirectionComponent>()->SetLastMoveDirection(m_LastMoveDir);
+				m_Target->GetComponent<MovementDirectionComponent>()->SetMovementDirection(MovementDirectionComponent::MovementDirection::None);
+			}
+			
+		}
+		else
+		{
+			m_IsActive = false;
+		}
+		
+	}
+
+	void StopMovingCommand::OnEvent(Event e)
+	{
+		switch (e) { case Event::PlayerDied: m_IsActive = false; }
 	}
 
 	StopMovingCommand::~StopMovingCommand()

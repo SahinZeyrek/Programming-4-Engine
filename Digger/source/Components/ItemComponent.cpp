@@ -29,5 +29,13 @@ namespace dae
 	{
 		m_ColliderComp = owner->GetComponent<ColliderComponent>();
 	}
+
+	ItemComponent::~ItemComponent()
+	{
+		for (auto el : m_Subject.GetObservers())
+		{
+			m_Subject.Unbind(el);
+		}
+	}
 }
 

@@ -6,7 +6,11 @@ namespace dae
 {
 	Component::GameObjectPtr Component::GetOwner() const
 	{
-		return m_pOwner;
+		if (m_pOwner)
+		{
+			return m_pOwner;
+		}
+		return nullptr;
 	}
 	void Component::SetOwner(GameObjectPtr pOwner)
 	{

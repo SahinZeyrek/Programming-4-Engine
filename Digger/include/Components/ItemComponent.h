@@ -13,6 +13,7 @@ namespace dae
 		virtual void Render() override;
 		void AddObserver(Observer* observer);
 		ItemComponent(GameObject* owner);
+		~ItemComponent();
 		ItemComponent(const ItemComponent& other) = delete;
 		ItemComponent(ItemComponent&& other) = delete;
 		ItemComponent& operator=(const ItemComponent& other) = delete;

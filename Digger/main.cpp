@@ -17,7 +17,6 @@
 #include "Controller.h"
 #include "AllCommands.h"
 #include "WinGameAch.h"
-#include "SoundComponent.h"
 #include "Grid.h"
 
 #include "ServiceLocator.h"
@@ -102,27 +101,42 @@ void load()
 	auto pBigTom = new GameObject();
 	auto rtu_FunnyMan = new RenderTextureComponent(pBigTom, nullptr);
 	pBigTom->AddComponent(rtu_FunnyMan);
-	pBigTom->AddComponent(new HealthComponent(pBigTom, 3, 25));
+	pBigTom->AddComponent(new HealthComponent(pBigTom, 5, 3));
 	pBigTom->AddComponent(new ScoreComponent(pBigTom, 0));
 	pBigTom->AddComponent(new SpeedComponent(pBigTom, 100.f));
-	pBigTom->GetComponent<RenderTextureComponent>()->SetTexture("funny-man.tga");
-	pBigTom->SetPosition(216, 180);
+	pBigTom->GetComponent<RenderTextureComponent>()->SetTexture("funny-man-rescaled.png");
+	pBigTom->AddComponent(new ColliderComponent(pBigTom, nullptr, 40.f, 40.f));
+	pBigTom->AddComponent(new EnemyComponent(pBigTom));
+	pBigTom->SetPosition(240, 200);
 
 	scene.Add(pBigTom);
 
+	auto pProjectile = new GameObject();
+	pProjectile->AddComponent(new SpeedComponent(pProjectile, 200.f));
+	pProjectile->AddComponent(new MovementDirectionComponent(pProjectile));
+	pProjectile->AddComponent(new RenderTextureComponent(pProjectile, nullptr));
+	pProjectile->AddComponent(new ColliderComponent(pProjectile, pBigTom, 40.f, 40.f));
+	pProjectile->GetComponent<RenderTextureComponent>()->SetTexture("Projectile.png");
+	pProjectile->SetPosition(-100.f, -100.f);
+	scene.Add(pProjectile);
+
 	auto pDigger = new GameObject();
 	auto diggerTexture = new RenderTextureComponent(pDigger, nullptr);
-	auto tinyTomHealth = new HealthComponent(pDigger, 3, 20);
 	pDigger->AddComponent(new MovementDirectionComponent(pDigger));
-	pDigger->AddComponent(tinyTomHealth);
+	pDigger->AddComponent(new HealthComponent(pDigger, 1, 3));
 	pDigger->AddComponent(diggerTexture);
+	pDigger->AddComponent(new GridComponent(pDigger, pGrid.get()));
 	pDigger->AddComponent(new ScoreComponent(pDigger, 0));
 	pDigger->AddComponent(new SpeedComponent(pDigger, 100.f));
 	pDigger->AddComponent(new SoundComponent(pDigger, "aughh.wav", 0.1f));
+	pDigger->AddComponent(new PlayerComponent(pDigger, { 200.f,120.f }));
+	pDigger->AddComponent(new ProjectileComponent(pDigger, pProjectile, 2.f));
+	pDigger->GetComponent<HealthComponent>()->AddObserver(pDigger->GetComponent<PlayerComponent>());
 	pDigger->GetComponent<RenderTextureComponent>()->SetTexture("Digger.png");
+	pDigger->GetComponent<ProjectileComponent>()->AddObserver(pBigTom->GetComponent<EnemyComponent>());
 	pDigger->SetPosition(200, 120);
 	scene.Add(pDigger);
-
+	pBigTom->GetComponent<ColliderComponent>()->SetTarget(pDigger);
 #pragma endregion Players
 	
 	auto player1LivesUI = new GameObject();
@@ -136,6 +150,7 @@ void load()
 	player1LivesUI->AddComponent(healthUIComp);
 
 	scene.Add(player1LivesUI);
+	pBigTom->GetComponent<EnemyComponent>()->AddObserver(healthUIComp);
 
 	auto player1ScoreUI = new GameObject();
 	player1ScoreUI->SetPosition(10, 35);
@@ -147,6 +162,7 @@ void load()
 	player1ScoreUI->AddComponent(scoreUIComp);
 
 	scene.Add(player1ScoreUI);
+	
 	for (size_t i{ 0 }; i < amountOfItems; ++i)
 	{
 		pGrid->GetItems()[i]->GetComponent<ColliderComponent>()->SetTarget(pDigger);
@@ -205,10 +221,10 @@ void load()
 	//inputManager.AddMapping(0, std::move(moveLeftCommand), Controller::ControllerButton::DPadLeft);
 
 	std::unique_ptr<KillCommand> damageBigTom = std::make_unique<KillCommand>(pBigTom);
-	inputManager.AddMapping(0, std::move(damageBigTom), Controller::ControllerButton::RightShoulder, dae::InputManager::inputCondition::Press);
+	inputManager.AddMapping(0, std::move(damageBigTom), Controller::ControllerButton::RightShoulder, InputManager::inputCondition::Press);
 
 	std::unique_ptr<AddScoreCommand> addScoreBigTom = std::make_unique<AddScoreCommand>(pBigTom);
-	inputManager.AddMapping(0, std::move(addScoreBigTom), Controller::ControllerButton::ButtonX, dae::InputManager::inputCondition::Press);
+	inputManager.AddMapping(0, std::move(addScoreBigTom), Controller::ControllerButton::ButtonX,InputManager::inputCondition::Press);
 
 	//--------------------------------------------
 	// KEYBOARD
@@ -217,55 +233,58 @@ void load()
 	//--------------------------------------------
 	std::unique_ptr<StartMovingCommand> kbLeftStart = std::make_unique<StartMovingCommand>(pDigger, pGrid,MovementDirectionComponent::MovementDirection::West);
 	inputManager.AddKeyboardMapping(std::move(kbLeftStart), SDL_SCANCODE_A, InputManager::inputCondition::Press);
-
-
+	
 	std::unique_ptr<MoveCommand> kbMoveLeftCommand = std::make_unique<MoveCommand>(pDigger, pGrid, MovementDirectionComponent::MovementDirection::West);
-	inputManager.AddKeyboardMapping(std::move(kbMoveLeftCommand), SDL_SCANCODE_A, dae::InputManager::inputCondition::Hold);
-
+	inputManager.AddKeyboardMapping(std::move(kbMoveLeftCommand), SDL_SCANCODE_A, InputManager::inputCondition::Hold);
+	
 	std::unique_ptr<StopMovingCommand> kbLeftEnd = std::make_unique<StopMovingCommand>(pDigger);
 	inputManager.AddKeyboardMapping(std::move(kbLeftEnd), SDL_SCANCODE_A, InputManager::inputCondition::Release);
-
+	
+	
 	//--------------------------------------------
-
+	
 	std::unique_ptr<StartMovingCommand> kbUpStart = std::make_unique<StartMovingCommand>(pDigger, pGrid, MovementDirectionComponent::MovementDirection::North);
 	inputManager.AddKeyboardMapping(std::move(kbUpStart), SDL_SCANCODE_W, InputManager::inputCondition::Press);
-
+	
 	std::unique_ptr<MoveCommand> kbMoveUpCommand = std::make_unique<MoveCommand>(pDigger, pGrid, MovementDirectionComponent::MovementDirection::North);
-	inputManager.AddKeyboardMapping(std::move(kbMoveUpCommand), SDL_SCANCODE_W, dae::InputManager::inputCondition::Hold);
-
+	inputManager.AddKeyboardMapping(std::move(kbMoveUpCommand), SDL_SCANCODE_W, InputManager::inputCondition::Hold);
+	
 	std::unique_ptr<StopMovingCommand> kbUpEnd = std::make_unique<StopMovingCommand>(pDigger);
 	inputManager.AddKeyboardMapping(std::move(kbUpEnd), SDL_SCANCODE_W, InputManager::inputCondition::Release);
-
-
+	
+	
 	//--------------------------------------------
 	std::unique_ptr<StartMovingCommand> kbDownStart = std::make_unique<StartMovingCommand>(pDigger, pGrid,MovementDirectionComponent::MovementDirection::South);
 	inputManager.AddKeyboardMapping(std::move(kbDownStart), SDL_SCANCODE_S, InputManager::inputCondition::Press);
-
+	
 	std::unique_ptr<MoveCommand> kbMoveDownCommand = std::make_unique<MoveCommand>(pDigger, pGrid, MovementDirectionComponent::MovementDirection::South);
-	inputManager.AddKeyboardMapping(std::move(kbMoveDownCommand), SDL_SCANCODE_S, dae::InputManager::inputCondition::Hold);
-
+	inputManager.AddKeyboardMapping(std::move(kbMoveDownCommand), SDL_SCANCODE_S, InputManager::inputCondition::Hold);
+	
 	std::unique_ptr<StopMovingCommand> kbDownEnd = std::make_unique<StopMovingCommand>(pDigger);
 	inputManager.AddKeyboardMapping(std::move(kbDownEnd), SDL_SCANCODE_S, InputManager::inputCondition::Release);
-
-
+	
 	//--------------------------------------------
 	std::unique_ptr<StartMovingCommand> kbRightStart = std::make_unique<StartMovingCommand>(pDigger, pGrid,MovementDirectionComponent::MovementDirection::East);
 	inputManager.AddKeyboardMapping(std::move(kbRightStart), SDL_SCANCODE_D, InputManager::inputCondition::Press);
-
+	
 	std::unique_ptr<MoveCommand> kbmoveRightCommand = std::make_unique<MoveCommand>(pDigger, pGrid, MovementDirectionComponent::MovementDirection::East);
-	inputManager.AddKeyboardMapping(std::move(kbmoveRightCommand), SDL_SCANCODE_D, dae::InputManager::inputCondition::Hold);
-
+	inputManager.AddKeyboardMapping(std::move(kbmoveRightCommand), SDL_SCANCODE_D, InputManager::inputCondition::Hold);
+	
 	std::unique_ptr<StopMovingCommand> kbRightEnd = std::make_unique<StopMovingCommand>(pDigger);
 	inputManager.AddKeyboardMapping(std::move(kbRightEnd), SDL_SCANCODE_D, InputManager::inputCondition::Release);
+	
+
 	//--------------------------------------------
 #pragma endregion MOVE COMMANDS
 
 	std::unique_ptr<KillCommand> kbDamageTinyTom = std::make_unique<KillCommand>(pDigger);
-	inputManager.AddKeyboardMapping(std::move(kbDamageTinyTom), SDL_SCANCODE_R, dae::InputManager::inputCondition::Press);
+	inputManager.AddKeyboardMapping(std::move(kbDamageTinyTom), SDL_SCANCODE_R, InputManager::inputCondition::Press);
 
 	std::unique_ptr<AddScoreCommand> kbAddScoreTinyTom = std::make_unique<AddScoreCommand>(pDigger);
-	inputManager.AddKeyboardMapping(std::move(kbAddScoreTinyTom), SDL_SCANCODE_Q, dae::InputManager::inputCondition::Press);
+	inputManager.AddKeyboardMapping(std::move(kbAddScoreTinyTom), SDL_SCANCODE_Q,InputManager::inputCondition::Press);
 
+	std::unique_ptr<ShootCommand> kbShoot = std::make_unique<ShootCommand>(pDigger);
+	inputManager.AddKeyboardMapping(std::move(kbShoot), SDL_SCANCODE_SPACE, InputManager::inputCondition::Press);
 
 
 	// -------------------------------------------

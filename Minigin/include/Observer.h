@@ -9,7 +9,9 @@ namespace dae
 			PlayerDied,
 			ScoreChanged,
 			ScoreGoalReached,
-			ItemPickedUp
+			ItemPickedUp,
+			PlayerDamaged,
+			EnemyHit
 		};
 		virtual void OnEvent(Event e) = 0;
 		virtual ~Observer() = default;

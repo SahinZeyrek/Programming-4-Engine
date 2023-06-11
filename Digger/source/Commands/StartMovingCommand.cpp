@@ -9,38 +9,59 @@ namespace dae
 {
 	void StartMovingCommand::Execute()
 	{
-		glm::vec2 pos{   m_Target->GetLocalPosition().x,
-						 m_Target->GetLocalPosition().y };
-		std::cout << "Local X is " << pos.x << '\n';
-		std::cout << "Local Y is " << pos.y << '\n';
-		//const int cellSize = m_Grid->GetCellSize();
-		if (m_Target->GetComponent<MovementDirectionComponent>()->GetMovementDirection()
-			== MovementDirectionComponent::MovementDirection::None)
+		if (m_Target != nullptr && m_IsActive)
 		{
-			if (m_Grid->IsNearCellTopLeft(40.f,pos.x,pos.y))
+			glm::vec2 pos{ m_Target->GetLocalPosition().x,
+							 m_Target->GetLocalPosition().y };
+			std::cout << "Local X is " << pos.x << '\n';
+			std::cout << "Local Y is " << pos.y << '\n';
+			//const int cellSize = m_Grid->GetCellSize();
+			if (m_Target->GetComponent<MovementDirectionComponent>()->GetOwner() == nullptr)
 			{
-				int index = m_Grid->GetIndexFromPos(pos.x, pos.y);
-				auto cell =m_Grid->GetCellFromIndex(index);
-				if (cell)
-				{
-					cell->isActive = false;
-				}
-				m_Target->SetPosition(m_Grid->GetCellTopLeft(pos.x, pos.y, m_Target->GetComponent<MovementDirectionComponent>()->GetMovementDirection()).x,
-									  m_Grid->GetCellTopLeft(pos.x, pos.y, m_Target->GetComponent<MovementDirectionComponent>()->GetMovementDirection()).y);
-				m_Target->GetComponent<MovementDirectionComponent>()->SetMovementDirection(m_MovementDirection);
+				m_IsActive = false;
 			}
 			else
 			{
-				m_Target->GetComponent<MovementDirectionComponent>()->SetMovementDirection(
-				m_Target->GetComponent<MovementDirectionComponent>()->GetLastMovementDirection());
-				m_Target->SetPosition(m_Grid->GetCellTopLeft(pos.x, pos.y, m_Target->GetComponent<MovementDirectionComponent>()->GetMovementDirection()).x
-					,				  m_Grid->GetCellTopLeft(pos.x, pos.y, m_Target->GetComponent<MovementDirectionComponent>()->GetMovementDirection()).y);
+				if (m_Target->GetComponent<MovementDirectionComponent>()->GetMovementDirection()
+					== MovementDirectionComponent::MovementDirection::None)
+				{
+					if (m_Grid->IsNearCellTopLeft(40.f, pos.x, pos.y))
+					{
+						int index = m_Grid->GetIndexFromPos(pos.x, pos.y);
+						auto cell = m_Grid->GetCellFromIndex(index);
+						if (cell)
+						{
+							cell->isActive = false;
+						}
+						m_Target->SetPosition(m_Grid->GetCellTopLeft(pos.x, pos.y, m_Target->GetComponent<MovementDirectionComponent>()->GetMovementDirection()).x,
+							m_Grid->GetCellTopLeft(pos.x, pos.y, m_Target->GetComponent<MovementDirectionComponent>()->GetMovementDirection()).y);
+						m_Target->GetComponent<MovementDirectionComponent>()->SetMovementDirection(m_MovementDirection);
+					}
+					else
+					{
+						m_Target->GetComponent<MovementDirectionComponent>()->SetMovementDirection(
+							m_Target->GetComponent<MovementDirectionComponent>()->GetLastMovementDirection());
+						m_Target->SetPosition(m_Grid->GetCellTopLeft(pos.x, pos.y, m_Target->GetComponent<MovementDirectionComponent>()->GetMovementDirection()).x
+							, m_Grid->GetCellTopLeft(pos.x, pos.y, m_Target->GetComponent<MovementDirectionComponent>()->GetMovementDirection()).y);
+					}
+					//m_Target->GetComponent<MovementDirectionComponent>()->SetMovementDirection(m_Target->GetComponent<MovementDirectionComponent>()->GetLastMovementDirection());
+					std::cout << "test\n";
+				}
 			}
-			//m_Target->GetComponent<MovementDirectionComponent>()->SetMovementDirection(m_Target->GetComponent<MovementDirectionComponent>()->GetLastMovementDirection());
-			std::cout << "test\n";
+			
 		}
 
 		
+	}
+
+	void StartMovingCommand::OnEvent(Event e)
+	{
+		switch (e)
+		{
+		case Event::PlayerDied:
+			m_IsActive = false;
+			break;
+		}
 	}
 
 	StartMovingCommand::StartMovingCommand(GameObject* target, const std::shared_ptr<Grid> grid,MoveDir moveDir) :

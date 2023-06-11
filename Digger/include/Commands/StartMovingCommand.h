@@ -6,11 +6,12 @@
 #include <memory>
 namespace dae
 {
-	class StartMovingCommand final : public Command
+	class StartMovingCommand final : public Command,public Observer
 	{
 	public:
 		using MoveDir = MovementDirectionComponent::MovementDirection;
 		virtual void Execute() override;
+		virtual void OnEvent(Event e) override;
 
 		StartMovingCommand(GameObject* target,std::shared_ptr<Grid> grid, MoveDir moveDir);
 		virtual ~StartMovingCommand() override;
@@ -21,6 +22,7 @@ namespace dae
 
 	private:
 		//void HandleStart(const float xOffset, const float yOffset);
+		bool m_IsActive{true};
 		GameObject* m_Target;
 		std::shared_ptr<Grid> m_Grid;
 		glm::vec2 m_Offset{};

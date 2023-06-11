@@ -28,6 +28,7 @@ namespace dae
         int GetIndexFromPos(const float x, const float y);
         int GetCellSize() const { return m_CellSize; };
         std::vector<GameObject*> GetItems();
+        std::vector<Cell> GetCells();
         void AddGameObj(GameObject* go);
         void DistributeItems();
         const std::vector<Cell>& GetCells() const { return m_Cells; };

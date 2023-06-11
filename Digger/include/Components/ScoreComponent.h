@@ -16,7 +16,7 @@ namespace dae
 		//------------------------------------------------
 		// RULE OF FIVE 
 		//------------------------------------------------
-		virtual ~ScoreComponent() = default;
+		virtual ~ScoreComponent();
 		ScoreComponent(const ScoreComponent&) = delete;
 		ScoreComponent(ScoreComponent&&) = delete;
 		ScoreComponent& operator=(const ScoreComponent&) = delete;

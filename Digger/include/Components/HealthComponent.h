@@ -7,17 +7,17 @@ namespace dae
 	{
 	public:
 		void TakeDamage(int damage);
-		void BindOnHealthChanged(Observer* observer);
+		void AddObserver(Observer* observer);
 		int GetLives() const { return m_Lives; }
 		void ReduceLives() { --m_Lives; }
-
+		bool GetIsDead()const { return m_IsDead; }
 		virtual void Update() override;
 		virtual void Render() override;
 		//------------------------------------------------
 		// RULE OF FIVE 
 		//------------------------------------------------
 		HealthComponent(GameObjectPtr owner, int health,int lives);
-		virtual ~HealthComponent() = default;
+		virtual ~HealthComponent();
 		HealthComponent(const HealthComponent&) = delete;
 		HealthComponent(HealthComponent&&) = delete;
 		HealthComponent& operator=(const HealthComponent&) = delete;

@@ -168,8 +168,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AllCommands.h" />
-    <ClInclude Include="AllComponents.h" />
+    <ClInclude Include="include\Commands\AllCommands.h" />
+    <ClInclude Include="include\Components\AllComponents.h" />
+    <ClInclude Include="include\Components\GridComponent.h" />
+    <ClInclude Include="include\Components\EnemyComponent.h" />
     <ClInclude Include="include\Components\ColliderComponent.h" />
     <ClInclude Include="include\Grid.h" />
     <ClInclude Include="include\Components\GridRenderer.h" />
@@ -190,8 +192,16 @@
     <ClInclude Include="include\Commands\StartMovingCommand.h" />
     <ClInclude Include="include\Components\MovementDirectionComponent.h" />
     <ClInclude Include="include\Components\ItemComponent.h" />
+    <ClInclude Include="include\Components\PlayerComponent.h" />
+    <ClInclude Include="include\Components\ProjectileComponent.h" />
+    <ClInclude Include="include\Commands\ShootCommand.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Components\GridComponent.cpp" />
+    <ClCompile Include="source\Commands\ShootCommand.cpp" />
+    <ClCompile Include="source\Components\ProjectileComponent.cpp" />
+    <ClCompile Include="source\Components\EnemyComponent.cpp" />
+    <ClCompile Include="source\Components\PlayerComponent.cpp" />
     <ClCompile Include="source\Components\ItemComponent.cpp" />
     <ClCompile Include="source\Components\ColliderComponent.cpp" />
     <ClCompile Include="source\Components\MovementDirectionComponent.cpp" />

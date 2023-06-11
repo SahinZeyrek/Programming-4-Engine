@@ -63,10 +63,10 @@
     <ClInclude Include="include\Components\UIComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AllCommands.h">
+    <ClInclude Include="include\Commands\AllCommands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AllComponents.h">
+    <ClInclude Include="include\Components\AllComponents.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Achievement\WinGameAch.h">
@@ -91,6 +91,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Components\ItemComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Components\EnemyComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Components\PlayerComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Components\ProjectileComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Commands\ShootCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Components\GridComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -156,6 +171,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\Components\ItemComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Components\EnemyComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Components\PlayerComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Components\ProjectileComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Commands\ShootCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Components\GridComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -13,6 +13,9 @@ namespace dae
 	{
 		switch (e)
 		{
+		case Event::PlayerDamaged:
+			m_HealthComp->TakeDamage(5);
+			break;
 		case Event::PlayerDied:
 			m_HealthComp->ReduceLives();
 			m_TextRender->SetText("Lives: " + std::to_string(m_HealthComp->GetLives()));
@@ -41,7 +44,7 @@ namespace dae
 		assert(m_TextRender != nullptr && "Text render component was nullptr");
 		assert(m_HealthComp != nullptr && "Health Component was nullptr");
 		m_TextRender->SetText("Lives: " + std::to_string(m_HealthComp->GetLives()));
-		m_HealthComp->BindOnHealthChanged(this);
+		m_HealthComp->AddObserver(this);
 	}
 	UIComponent::UIComponent(GameObjectPtr owner, ScoreComponent* targetScore) : Component(owner)
 	{

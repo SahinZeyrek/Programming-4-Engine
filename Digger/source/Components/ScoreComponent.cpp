@@ -40,5 +40,12 @@ namespace dae
 	{
 	}
 
+	ScoreComponent::~ScoreComponent()
+	{
+		for (auto el : m_Subject.GetObservers())
+		{
+			m_Subject.Unbind(el);
+		}
+	}
 }
 

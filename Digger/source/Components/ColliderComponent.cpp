@@ -1,5 +1,5 @@
 #include "ColliderComponent.h"
-
+#include "TimeUtil.h"
 
 namespace dae
 {
@@ -9,6 +9,15 @@ namespace dae
 		m_Rectangle.y = GetOwner()->GetLocalPosition().y;
 		m_TargetRectangle.x = m_Target->GetLocalPosition().x;
 		m_TargetRectangle.y = m_Target->GetLocalPosition().y;
+		if (!m_IsActive)
+		{
+			m_Timer += TimeUtil::deltaTime;
+			if (m_Timer >= m_MaxTime)
+			{
+				m_IsActive = true;
+				m_Timer = 0.f;
+			}
+		}
 	}
 
 	void ColliderComponent::Render()
@@ -19,15 +28,18 @@ namespace dae
 	bool ColliderComponent::IsOverlapping()
 	{
 		// NEED TO APPLY OFFSET BECAUSE POS IS TOP LEFT CORNER OF TEXTURE
-		const float offset{ 20.f };
-		auto targetPos = m_Target->GetLocalPosition();
-		if (m_Rectangle.x<= targetPos.x + offset && targetPos.x + offset <= m_Rectangle.x + m_Rectangle.width
-			&&
-			m_Rectangle.y<= targetPos.y + offset && targetPos.y + offset <= m_Rectangle.y + m_Rectangle.height)
+		if (m_IsActive)
 		{
-
-			//GetOwner()->GetParentScene()->Remove(GetOwner());
-			return true;
+			const float offset{ 20.f };
+			auto targetPos = m_Target->GetLocalPosition();
+			if (m_Rectangle.x <= targetPos.x + offset && targetPos.x + offset <= m_Rectangle.x + m_Rectangle.width
+				&&
+				m_Rectangle.y <= targetPos.y + offset && targetPos.y + offset <= m_Rectangle.y + m_Rectangle.height)
+			{
+				m_IsActive = false;
+				return true;
+			}
+			return false;
 		}
 		return false;
 	}
@@ -39,7 +51,8 @@ namespace dae
 
 	ColliderComponent::ColliderComponent(GameObject* owner, GameObject* target, 
 	                                     const float width,const float height) : Component(owner),
-	                                                                             m_Target(target)
+	                                                                             m_Target(target),
+								         m_Timer(0.f), m_MaxTime(2.f), m_IsActive(true)
 	{
 		m_Rectangle.x = owner->GetLocalPosition().x;
 		m_Rectangle.y = owner->GetLocalPosition().y;

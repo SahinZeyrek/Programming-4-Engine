@@ -10,7 +10,7 @@ namespace dae
 	{
 		Up, Down, Left, Right
 	};
-	class MoveCommand final : public Command
+	class MoveCommand final : public Command,public Observer
 	{
 	public:
 		using MoveDir = MovementDirectionComponent::MovementDirection;
@@ -21,11 +21,13 @@ namespace dae
 			m_MoveComp = m_ObjectPtr->GetComponent<MovementDirectionComponent>();
 			m_Grid = grid;	
 		}
+
+		virtual void OnEvent(Event e) override;
 		virtual void Execute() override;
 	private:
 		 GameObject* m_ObjectPtr;
 		 glm::vec3 m_Direction;
-		 bool m_IsMoving;
+		 bool m_IsActive{true};
 		MoveDir m_currentDirection;
 		MovementDirectionComponent* m_MoveComp;
 		std::shared_ptr<Grid> m_Grid;

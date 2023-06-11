@@ -9,7 +9,7 @@ namespace dae
 	void GridRenderer::Render()
 	{
 		auto& renderer = Renderer::GetInstance();
-		auto& cells = m_Grid->GetCells();
+		auto cells = m_Grid->GetCells();
 		SDL_SetRenderDrawColor(renderer.GetSDLRenderer(), 255, 255, 255, 255);
 		for (size_t i = 0; i < m_Grid->GetCells().size(); ++i)
 		{

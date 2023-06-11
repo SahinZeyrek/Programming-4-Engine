@@ -24,5 +24,9 @@ namespace dae
 		}
 	}
 
+	std::unordered_set<Observer*> Subject::GetObservers()
+	{
+		return m_Observers;
+	}
 }
 

@@ -4,3 +4,4 @@
 #include "AddScoreCommand.h"
 #include "StartMovingCommand.h"
 #include "StopMovingCommand.h"
+#include "ShootCommand.h"

@@ -7,8 +7,7 @@ namespace dae
 		m_Health -= damage;
 		if (m_Health <= 0)
 		{
-			--m_Lives;
-			if (m_Lives < 0)
+			if (m_Lives <= 0)
 			{
 				m_IsDead = true;
 			}
@@ -16,11 +15,10 @@ namespace dae
 			{
 				m_Health = m_MaxHealth;
 			}
-
 			m_Subject.Invoke(Observer::Event::PlayerDied);
 		}
 	}
-	void HealthComponent::BindOnHealthChanged(Observer* observer)
+	void HealthComponent::AddObserver(Observer* observer)
 	{
 		m_Subject.Bind(observer);
 	}
@@ -41,5 +39,12 @@ namespace dae
 		m_Health = health;
 	}
 
+	HealthComponent::~HealthComponent()
+	{
+		for (auto el : m_Subject.GetObservers())
+		{
+			m_Subject.Unbind(el);
+		}
+	}
 }
 

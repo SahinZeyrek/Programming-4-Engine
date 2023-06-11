@@ -173,6 +173,11 @@ namespace dae
 		return m_GameObjects;
 	}
 
+	std::vector<Grid::Cell> Grid::GetCells()
+	{
+		return m_Cells;
+	}
+
 	void Grid::AddGameObj(GameObject* go)
 	{
 		m_GameObjects.push_back(go);
