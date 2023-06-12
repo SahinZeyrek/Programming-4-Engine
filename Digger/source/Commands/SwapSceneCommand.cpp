@@ -6,7 +6,6 @@ namespace dae
 {
 	void SwapSceneCommand::Execute()
 	{
-		FiniteStateMachine::GetInstance().highscoreState->GetHighScoreObjs().clear();
 		InputManager::GetInstance().SetCanProcess(false);
 		auto& sm = SceneManager::GetInstance();
 		std::string capture = m_SceneName;

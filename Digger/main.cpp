@@ -48,9 +48,6 @@ namespace dae
 #endif
 #pragma region Misc
 		ServiceLocator::GetSoundSystem().SetVolume(1.f);
-		std::cout << "-------------------------------------------------------------------------------\n";
-		std::cout << "PRESS Q TO PLAY A SOUND (might be loud, careful even though volume is set to 1)\n";
-		std::cout << "-------------------------------------------------------------------------------\n";
 
 		GameObject* pBackground = new GameObject();
 		RenderTextureComponent* rt_Background = new RenderTextureComponent(pBackground, nullptr);
@@ -77,9 +74,8 @@ namespace dae
 		fsm.Push(fsm.mainMenuState.get());
 
 		auto pTinyFont = ResourceManager::GetInstance().LoadFont("Lingua.otf", 20);
-		auto objs = fsm.highscoreState->GetHighScoreObjs();
+		auto& objs = fsm.highscoreState->GetHighScoreObjs();
 		objs.clear();
-
 
 		for (size_t i = 0; i < fsm.highscoreState->GetAmountHighScores(); ++i)
 		{
@@ -90,8 +86,6 @@ namespace dae
 			fsm.highscoreState->AddHighScoreObj(highscore);
 			scene->Add(highscore);
 		}
-
-
 		auto& im = InputManager::GetInstance();
 		std::unique_ptr<PopStateCommand> kbPopMenu = std::make_unique<PopStateCommand>();
 		im.AddKeyboardMapping(std::move(kbPopMenu), SDL_SCANCODE_ESCAPE, InputManager::inputCondition::Press);
@@ -429,6 +423,7 @@ namespace dae
 		pBigTom->GetComponent<RenderTextureComponent>()->SetTexture("funny-man-rescaled.png");
 		pBigTom->AddComponent(new ColliderComponent(pBigTom, nullptr, 40.f, 40.f));
 		pBigTom->AddComponent(new EnemyComponent(pBigTom));
+		pBigTom->AddComponent(new EnemyMover(pBigTom, pGrid.get()));
 		pBigTom->SetPosition(240, 200);
 
 		scene->Add(pBigTom);
@@ -732,6 +727,7 @@ namespace dae
 		pBigTom->GetComponent<RenderTextureComponent>()->SetTexture("funny-man-rescaled.png");
 		pBigTom->AddComponent(new ColliderComponent(pBigTom, nullptr, 40.f, 40.f));
 		pBigTom->AddComponent(new EnemyComponent(pBigTom));
+		pBigTom->AddComponent(new EnemyMover(pBigTom, pGrid.get()));
 		pBigTom->SetPosition(360, 40);
 
 		scene->Add(pBigTom);
@@ -938,9 +934,6 @@ namespace dae
 #endif
 #pragma region Misc
 		ServiceLocator::GetSoundSystem().SetVolume(1.f);
-		std::cout << "-------------------------------------------------------------------------------\n";
-		std::cout << "PRESS Q TO PLAY A SOUND (might be loud, careful even though volume is set to 1)\n";
-		std::cout << "-------------------------------------------------------------------------------\n";
 
 		GameObject* pBackground = new GameObject();
 		RenderTextureComponent* rt_Background = new RenderTextureComponent(pBackground, nullptr);
@@ -1009,6 +1002,7 @@ namespace dae
 		pBigTom->GetComponent<RenderTextureComponent>()->SetTexture("funny-man-rescaled.png");
 		pBigTom->AddComponent(new ColliderComponent(pBigTom, nullptr, 40.f, 40.f));
 		pBigTom->AddComponent(new EnemyComponent(pBigTom));
+		pBigTom->AddComponent(new EnemyMover(pBigTom, pGrid.get()));
 		pBigTom->SetPosition(360, 40);
 
 		scene->Add(pBigTom);

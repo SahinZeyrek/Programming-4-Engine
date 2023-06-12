@@ -168,6 +168,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Components\EnemyMover.h" />
     <ClInclude Include="include\FiniteStateMachine.h" />
     <ClInclude Include="include\State\HighScoreMenu.h" />
     <ClInclude Include="include\GameMode.h" />
@@ -207,6 +208,7 @@
     <ClInclude Include="include\Commands\SwapSceneCommand.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Components\EnemyMover.cpp" />
     <ClCompile Include="source\Commands\MuteSoundCommand.cpp" />
     <ClCompile Include="source\Commands\PopStateCommand.cpp" />
     <ClCompile Include="source\Commands\PushState.cpp" />
