@@ -1,0 +1,5 @@
+Machien|6000
+fabriek|-5
+maybe unused|1
+Kast|6500
+Cheater|125000

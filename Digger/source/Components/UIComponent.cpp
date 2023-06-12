@@ -1,6 +1,7 @@
 #include "UIComponent.h"
 #include "GameObject.h"
 #include <cassert>
+#include <fstream>
 namespace dae
 {
 	void UIComponent::Update()
@@ -24,11 +25,21 @@ namespace dae
 			m_TextRender->SetText("Score: " + std::to_string(m_ScoreComp->GetScore()));
 			break;
 		case Event::ItemPickedUp:
-
 			m_ScoreComp->AddScore(25);
 			m_ScoreComp->IncrementCounter();
 			break;
+		case Event::AllItemsPickedUp:
+			{
+				std::ofstream os{ "../Data/HighScores.txt" ,std::ios::app };
+				if (os.is_open())
+				{
+					std::string name = "Cheater";
+					os << name << "|" << m_ScoreComp->GetScore() * 5000.f << '\n';
 
+				}
+				break;
+			}
+			
 		default:
 			break;
 		}

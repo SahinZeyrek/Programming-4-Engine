@@ -200,10 +200,16 @@
     <ClInclude Include="include\Commands\ShootCommand.h" />
     <ClInclude Include="include\State\MenuState.h" />
     <ClInclude Include="include\State\MainMenuState.h" />
+    <ClInclude Include="include\Commands\PopStateCommand.h" />
+    <ClInclude Include="include\Commands\MuteSoundCommand.h" />
+    <ClInclude Include="include\Commands\PushState.h" />
     <ClInclude Include="SoloGameMode.h" />
     <ClInclude Include="include\Commands\SwapSceneCommand.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Commands\MuteSoundCommand.cpp" />
+    <ClCompile Include="source\Commands\PopStateCommand.cpp" />
+    <ClCompile Include="source\Commands\PushState.cpp" />
     <ClCompile Include="source\State\MainMenuState.cpp" />
     <ClCompile Include="source\FiniteStateMachine.cpp" />
     <ClCompile Include="source\State\HighScoreMenu.cpp" />

@@ -1,6 +1,7 @@
 #include "ProjectileComponent.h"
 #include "MovementDirectionComponent.h"
 #include "SpeedComponent.h"
+#include "ScoreComponent.h"
 #include "TimeUtil.h"
 
 namespace dae
@@ -20,12 +21,12 @@ namespace dae
 			m_Subject.Unbind(el);
 		}
 	}
-
 	void ProjectileComponent::Update()
 	{
 		if (m_ColliderComp->IsOverlapping())
 		{
 			m_Subject.Invoke(Observer::Event::EnemyHit);
+			GetOwner()->GetComponent<ScoreComponent>()->AddScore(250);
 			m_Bullet->SetPosition(-1000.f, -1000.f);
 			m_Direction = { 0,0,0 };
 		}

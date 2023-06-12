@@ -6,3 +6,6 @@
 #include "StopMovingCommand.h"
 #include "ShootCommand.h"
 #include "SwapSceneCommand.h"
+#include "PushState.h"
+#include "PopStateCommand.h"
+#include "MuteSoundCommand.h"

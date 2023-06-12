@@ -26,6 +26,7 @@ namespace dae
 		~FiniteStateMachine();
 		FiniteStateMachine() = default;
 		std::vector<std::unique_ptr<MenuState>> m_States;
+		
 	};
 }
 

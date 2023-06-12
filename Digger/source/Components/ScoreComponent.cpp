@@ -13,6 +13,10 @@ namespace dae
 	{
 		m_Score += amount;
 		m_Subject.Invoke(Observer::Event::ScoreChanged);
+		if (m_Score % 20000)
+		{
+			m_Subject.Invoke(Observer::Event::ExtraLive);
+		}
 	}
 
 	void ScoreComponent::BindOnScoreChanged(Observer* observer)

@@ -19,3 +19,8 @@ dae::Font::~Font()
 {
 	TTF_CloseFont(m_font);
 }
+
+void dae::Font::SetSize(unsigned size)
+{
+	m_size = size;
+}

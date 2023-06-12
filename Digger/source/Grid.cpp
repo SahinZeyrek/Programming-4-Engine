@@ -1,9 +1,25 @@
 #include "Grid.h"
 #include <iostream>
 #include <random>
-
+#include <fstream>
+#include "Commands/SwapSceneCommand.h"
 namespace dae
 {
+	void Grid::OnEvent(Event e)
+	{
+		switch (e)
+		{
+			case Event::ItemPickedUp:
+				--m_AmountItems;
+				if (m_AmountItems <= 0)
+				{
+					std::cout << "level complete \n";
+					m_Subject.Invoke(Event::AllItemsPickedUp);
+				}
+				break;
+		}
+	}
+
 	Grid::Grid(int rows, int cols, int cellsize)
 	{
 		m_Rows = rows;
@@ -166,6 +182,11 @@ namespace dae
 		const float cellY{ std::floor(y / m_CellSize) };
 		const int index =  static_cast<int>( cellX + (cellY -1) * static_cast<float>(m_Cols));
 		return index;
+	}
+
+	void Grid::AddObserver(Observer* observer)
+	{
+		m_Subject.Bind(observer);
 	}
 
 	std::vector<GameObject*> Grid::GetItems()

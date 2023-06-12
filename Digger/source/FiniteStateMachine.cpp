@@ -14,7 +14,7 @@ namespace dae
 
 	void FiniteStateMachine::Pop()
 	{
-		if (m_Stack.empty())
+		if (m_Stack.size() >= 2)
 		{
 			m_Stack.top()->OnExit();
 			m_Stack.pop();
@@ -28,6 +28,10 @@ namespace dae
 	MenuState* FiniteStateMachine::GetState()
 	{
 		return m_Stack.top();
+	}
+
+	FiniteStateMachine::~FiniteStateMachine()
+	{
 	}
 }
 

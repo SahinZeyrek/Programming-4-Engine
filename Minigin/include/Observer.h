@@ -11,7 +11,9 @@ namespace dae
 			ScoreGoalReached,
 			ItemPickedUp,
 			PlayerDamaged,
-			EnemyHit
+			EnemyHit,
+			ExtraLive,
+			AllItemsPickedUp
 		};
 		virtual void OnEvent(Event e) = 0;
 		virtual ~Observer() = default;

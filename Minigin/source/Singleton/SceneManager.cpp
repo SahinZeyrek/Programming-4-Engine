@@ -45,8 +45,8 @@ void dae::SceneManager::LoadScene(const std::string& name)
 	{
 		m_CurrentScene->RemoveAll();
 	}
-	(*it)->Load();
 	InputManager::GetInstance().Clear();
+	(*it)->Load();
 	InputManager::GetInstance().SetCanProcess(true);
 	SetCurrentScene(it->get());
 }
